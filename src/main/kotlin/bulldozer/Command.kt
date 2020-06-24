@@ -1,12 +1,16 @@
 package bulldozer
 
+import net.minecraft.client.MinecraftClient
+
 interface Command {
-    var syntax: String
-    var aliases: Array<String>
+    val syntax: String
+    val aliases: Array<String>
+    val mc: MinecraftClient
+        get() = MinecraftClient.getInstance()
 
     fun getName(): String {
         return aliases[0]
     }
 
-    fun onCommand(){}
+    fun onCommand(args: List<String>){}
 }

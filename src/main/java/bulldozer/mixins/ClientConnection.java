@@ -23,7 +23,7 @@ public class ClientConnection {
         if (packet_1 instanceof ChatMessageC2SPacket) {
             ChatMessageC2SPacket pack = (ChatMessageC2SPacket) packet_1;
             if (pack.getChatMessage().startsWith("-")) {
-                Manager.callCommand(pack.getChatMessage().substring(1));
+                Manager.callCommand(pack.getChatMessage().substring(1).trim());
                 callback.cancel();
             }
         }

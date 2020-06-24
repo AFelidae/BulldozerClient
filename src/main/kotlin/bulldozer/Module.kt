@@ -6,6 +6,8 @@ interface Module {
     var name: String
     var description: String
     var toggled: Boolean
+    val mc: MinecraftClient
+        get() = MinecraftClient.getInstance()
 
     fun onDisable()
     fun onEnable()
