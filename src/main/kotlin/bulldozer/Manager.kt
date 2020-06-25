@@ -1,9 +1,12 @@
 package bulldozer
 
 import bulldozer.command.*;
+import bulldozer.module.*;
+
 
 object Manager {
-    var modules = arrayOf(0)
+
+    var modules = arrayOf(Glide())
 
     var commands = arrayOf(
         Bottom(),
@@ -28,6 +31,10 @@ object Manager {
                 if (target == alias) cmd.onCommand(parameters)
             }
         }
+
+    }
+
+    fun init(){
 
     }
 }

@@ -1,20 +1,36 @@
 package bulldozer
 
+import bulldozer.gui.Setting
+import com.google.common.eventbus.Subscribe
 import net.minecraft.client.MinecraftClient
 
-interface Module {
+open class Module {
+    var toggled = false
+    var key = -2
     var name: String
     var description: String
-    var toggled: Boolean
-    val mc: MinecraftClient
-        get() = MinecraftClient.getInstance()
+    var settings: Array<Setting>
+    var mc: MinecraftClient = MinecraftClient.getInstance()
 
-    fun onDisable()
-    fun onEnable()
+    constructor(n: String, d: String, s: Array<Setting>){
+        name = n
+        description = d
+        settings = s
+
+        for (method in javaClass.methods) {
+            if (method.isAnnotationPresent(Subscribe::class.java)) {
+                Client.eventSystem.register(this)
+                break
+            }
+        }
+    }
 
     fun toggle(){
         toggled = !toggled
         if(toggled) onEnable()
         else onDisable()
     }
+
+    private fun onEnable(){}
+    private fun onDisable(){}
 }
