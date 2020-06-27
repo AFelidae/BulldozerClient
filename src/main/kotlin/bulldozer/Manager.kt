@@ -2,16 +2,22 @@ package bulldozer
 
 import bulldozer.command.*;
 import bulldozer.module.*;
+import com.google.common.eventbus.EventBus
 
 
 object Manager {
+    @kotlin.jvm.JvmField
+    open var eventSystem: EventBus = EventBus()
+    var modules = arrayOf(Flight3d())
 
-    var modules = arrayOf(Glide())
+
 
     var commands = arrayOf(
+        Adjust(),
         Bottom(),
         Help(),
-        Top())
+        Top(),
+        Toggle())
 
     @JvmStatic
     fun callCommand(command: String) {
@@ -20,7 +26,7 @@ object Manager {
 
         if (command.indexOf(" ") > -1) {
             target = command.substring(0, command.indexOf(" ")).toLowerCase()
-            parameters = command.substring(command.indexOf(" ")).split(" ")
+            parameters = command.substring(command.indexOf(" ")+1).trim().split(" ")
         } else {
             target = command.toLowerCase()
             parameters = emptyList()
@@ -31,10 +37,6 @@ object Manager {
                 if (target == alias) cmd.onCommand(parameters)
             }
         }
-
-    }
-
-    fun init(){
 
     }
 }

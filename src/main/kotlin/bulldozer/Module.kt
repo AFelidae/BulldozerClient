@@ -19,7 +19,7 @@ open class Module {
 
         for (method in javaClass.methods) {
             if (method.isAnnotationPresent(Subscribe::class.java)) {
-                Client.eventSystem.register(this)
+                Manager.eventSystem.register(this)
                 break
             }
         }

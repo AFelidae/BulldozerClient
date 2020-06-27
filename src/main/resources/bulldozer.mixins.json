@@ -6,7 +6,8 @@
 
   ],
   "client": [
-    "ClientConnection"
+    "ClientConnection",
+    "ClientPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1

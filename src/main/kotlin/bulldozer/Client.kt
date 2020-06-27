@@ -10,9 +10,6 @@ import com.google.common.eventbus.EventBus
 
 @Suppress("unused")
 class Client : ClientModInitializer {
-    @kotlin.jvm.JvmField
-    var eventSystem: EventBus = EventBus()
     override fun onInitializeClient() {
-
     }
 }
