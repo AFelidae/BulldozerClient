@@ -18,9 +18,22 @@ class Adjust : Command {
                 for (set in mod.settings) {
                     if (set.name.toLowerCase().replace(" ", "") == args[1].toLowerCase()) {
                         try {
-                            if (set.value is Boolean) set.value = args[2].toBoolean()
-                            if (set.value is Int) set.value = args[2].toInt()
-                            if (set.value is Double) set.value = args[2].toDouble()
+                            if (set.value is Boolean) {
+                                set.value = args[2].toBoolean()
+                                Chat.clientMessage(args[1] + " was set to (boolean) " + args[2])
+                                return
+                            }
+                            if (set.value is Int) {
+                                set.value = args[2].toInt()
+                                Chat.clientMessage(args[1] + " was set to (int) " + args[2])
+                                return
+                            }
+                            if (set.value is Double) {
+                                set.value = args[2].toDouble()
+                                Chat.clientMessage(args[1] + " was set to (double) " + args[2])
+                                return
+                            }
+                            Chat.errorMessage("Setting value is that of an unsupported type")
                         } catch (err: Exception){
                             Chat.errorMessage("Value couldn't be parsed... $err")
                         }

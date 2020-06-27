@@ -24,5 +24,6 @@ class Setting {
         value = default
         minimum = min
         maximum = max
+
     }
 }

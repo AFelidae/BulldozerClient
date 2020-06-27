@@ -3,12 +3,16 @@ package bulldozer
 import bulldozer.command.*;
 import bulldozer.module.*;
 import com.google.common.eventbus.EventBus
+import kotlin.reflect.typeOf
 
 
 object Manager {
     @kotlin.jvm.JvmField
     open var eventSystem: EventBus = EventBus()
-    var modules = arrayOf(Flight3d())
+    var modules = arrayOf(
+        Flight3d(),
+        FlightStatic(),
+        Zoom())
 
 
 
@@ -37,6 +41,5 @@ object Manager {
                 if (target == alias) cmd.onCommand(parameters)
             }
         }
-
     }
 }

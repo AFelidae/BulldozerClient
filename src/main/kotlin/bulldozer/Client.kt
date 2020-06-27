@@ -6,10 +6,15 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import java.util.function.Function
 import com.google.common.eventbus.EventBus
+import kotlin.reflect.typeOf
 
 
 @Suppress("unused")
 class Client : ClientModInitializer {
     override fun onInitializeClient() {
+        var x = Boolean
+        var y = Int
+        println(x)
+        println(y)
     }
 }
