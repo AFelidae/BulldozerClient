@@ -22,4 +22,8 @@ object Chat {
                 .addMessage(LiteralText("§c[§4Bulldozer§c] $msg"))
         } catch (err: Exception) {}
     }
+
+    fun compare(a: String, b: String): Boolean{
+        return a.toLowerCase().replace(" ", "") == b.toLowerCase().replace(" ", "")
+    }
 }

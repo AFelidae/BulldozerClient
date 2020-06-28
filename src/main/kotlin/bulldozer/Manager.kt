@@ -1,9 +1,10 @@
 package bulldozer
 
-import bulldozer.command.*;
-import bulldozer.module.*;
+import bulldozer.command.*
+import bulldozer.module.Flight3d
+import bulldozer.module.FlightStatic
+import bulldozer.module.Zoom
 import com.google.common.eventbus.EventBus
-import kotlin.reflect.typeOf
 
 
 object Manager {
@@ -41,5 +42,15 @@ object Manager {
                 if (target == alias) cmd.onCommand(parameters)
             }
         }
+    }
+
+    @JvmStatic
+    fun getModule(targetClass: Class<out Module?>): Module? {
+        for (module in modules) {
+            if (module.javaClass == targetClass) {
+                return module
+            }
+        }
+        return null
     }
 }

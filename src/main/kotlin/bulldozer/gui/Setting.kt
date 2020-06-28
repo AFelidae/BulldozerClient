@@ -19,6 +19,14 @@ class Setting {
         maximum = max
     }
 
+    constructor(text: String, default: Float, min: Float, max: Float){
+        name = text
+        value = default
+        minimum = min
+        maximum = max
+
+    }
+
     constructor(text: String, default: Double, min: Double, max: Double){
         name = text
         value = default

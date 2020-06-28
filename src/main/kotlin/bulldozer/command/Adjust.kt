@@ -14,9 +14,9 @@ class Adjust : Command {
             return
         }
         for (mod in Manager.modules) {
-            if (mod.name.toLowerCase().replace(" ", "") == args[0].toLowerCase()) {
+            if (Chat.compare(mod.name,args[0])) {
                 for (set in mod.settings) {
-                    if (set.name.toLowerCase().replace(" ", "") == args[1].toLowerCase()) {
+                    if (Chat.compare(set.name,args[1])) {
                         try {
                             if (set.value is Boolean) {
                                 set.value = args[2].toBoolean()

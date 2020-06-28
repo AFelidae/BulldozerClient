@@ -14,7 +14,7 @@ class Toggle : Command {
             return
         }
         for(mod in Manager.modules){
-            if (mod.name.toLowerCase().trim() == args[0].toLowerCase().trim()){
+            if (Chat.compare(mod.name,args[0])){
                 mod.toggle()
                 Chat.clientMessage(mod.name + "has been toggled to " + if(mod.toggled) "On" else "Off")
                 return
