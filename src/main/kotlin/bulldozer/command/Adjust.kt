@@ -33,6 +33,10 @@ class Adjust : Command {
                                 Chat.clientMessage(args[1] + " was set to (double) " + args[2])
                                 return
                             }
+                            if (set.value is Float){
+                                set.value = args[2].toFloat()
+                                Chat.clientMessage(args[1] + " was set to (float) " + args[2])
+                            }
                             Chat.errorMessage("Setting value is that of an unsupported type")
                         } catch (err: Exception){
                             Chat.errorMessage("Value couldn't be parsed... $err")
