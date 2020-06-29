@@ -6,9 +6,19 @@ import bulldozer.utils.Chat
 
 class Adjust : Command {
     override val aliases = arrayOf("adjust", "a")
-    override val syntax = "[module] [name of setting] [new value]"
+    override val syntax = "[module] | [module] [name of setting] [new value]"
 
     override fun onCommand(args: List<String>) {
+        if(args.size == 1){
+            for (mod in Manager.modules) {
+                if(Chat.compare(mod.name, args[0])){
+                    for(set in mod.settings){
+                        Chat.clientMessage(set.name + " : " + set.value.toString())
+                    }
+                }
+            }
+        }
+
         if (args.size < 3) {
             Chat.errorMessage("Syntax is incorrect")
             return

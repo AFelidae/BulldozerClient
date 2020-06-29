@@ -31,6 +31,6 @@ open class Module {
         else onDisable()
     }
 
-    private fun onEnable(){}
-    private fun onDisable(){}
+    open fun onEnable(){}
+    open fun onDisable(){}
 }
