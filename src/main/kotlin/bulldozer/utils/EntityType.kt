@@ -5,6 +5,7 @@ enum class EntityType{
     MONSTER,
     PLAYER,
     FRIEND,
-    OTHER
-
+    OTHER,
+    USER,
+    ITEM
 }
