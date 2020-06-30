@@ -18,7 +18,7 @@ object Manager {
     @kotlin.jvm.JvmField
     open var bindname = ""
 
-    private var modules = arrayOf(
+    var modules = arrayOf(
         Flight3d(),
         FlightStatic(),
         Zoom())

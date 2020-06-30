@@ -4,6 +4,7 @@ import bulldozer.Command;
 import bulldozer.Manager;
 import bulldozer.Module;
 import bulldozer.events.KeyPress;
+import bulldozer.gui.ClickGui;
 import bulldozer.utils.Chat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
@@ -29,6 +30,7 @@ public class Keyboard {
             }
         } else if (key == 344) { //Right Shift
             //toggle gui
+            MinecraftClient.getInstance().openScreen(new ClickGui());
             callback.cancel();
         } else if (key == 45) { // Minus
             MinecraftClient.getInstance().openScreen(new ChatScreen("-"));
