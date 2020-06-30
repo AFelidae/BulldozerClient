@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPlayerEntity {
 
     @Inject(at = @At("RETURN"), method = "tick()V", cancellable = true)
-    public void tick(CallbackInfo info) {
+    public void tick(CallbackInfo callback) {
 
         Tick event = new Tick();
         Manager.eventSystem.post(event);
-        if (event.isCancelled()) info.cancel();
+        if (event.isCancelled()) callback.cancel();
     }
 
     /*

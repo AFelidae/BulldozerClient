@@ -1,25 +1,33 @@
 package bulldozer
 
 import bulldozer.command.*
-import bulldozer.module.Flight3d
-import bulldozer.module.FlightStatic
-import bulldozer.module.Zoom
+import bulldozer.module.*
+import bulldozer.utils.Chat
 import com.google.common.eventbus.EventBus
-
+import java.lang.Exception
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
+import java.lang.Error
+import bulldozer.Module
+import bulldozer.Command
 
 object Manager {
     @kotlin.jvm.JvmField
     open var eventSystem: EventBus = EventBus()
-    var modules = arrayOf(
+    @kotlin.jvm.JvmField
+    var binding = false
+    @kotlin.jvm.JvmField
+    open var bindname = ""
+
+    private var modules = arrayOf(
         Flight3d(),
         FlightStatic(),
         Zoom())
 
-
-
     var commands = arrayOf(
         Adjust(),
+        Bind(),
         Bottom(),
+        DelBind(),
         Help(),
         Top(),
         Toggle())
@@ -39,9 +47,22 @@ object Manager {
 
         for (cmd in commands) {
             for (alias in cmd.aliases) {
-                if (target == alias) cmd.onCommand(parameters)
+                if (Chat.compare(target, alias)) try{ cmd.onCommand(parameters) } catch(Err: Exception){
+                    Chat.errorMessage(cmd.syntax)
+                }
             }
         }
+    }
+
+    @JvmStatic
+    fun fromKey(keycode:Int): Boolean{
+        var found = false
+        for(mod in modules){
+            if(mod.key == keycode){
+                found = true
+            }
+        }
+        return found
     }
 
     @JvmStatic
@@ -49,6 +70,26 @@ object Manager {
         for (module in modules) {
             if (module.javaClass == targetClass) {
                 return module
+            }
+        }
+        return null
+    }
+
+    @JvmStatic
+    fun getModuleByName(name:String): Module? {
+        for(mod in modules){
+            if(Chat.compare(mod.name, name)){
+                return mod;
+            }
+        }
+        return null
+    }
+
+    @JvmStatic
+    fun getCommandByName(name:String): Command? {
+        for(com in commands){
+            if(Chat.compare(com.aliases[0], name)) {
+                return com;
             }
         }
         return null

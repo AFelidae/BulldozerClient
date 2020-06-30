@@ -8,7 +8,8 @@
   "client": [
     "ClientConnection",
     "ClientPlayerEntity",
-    "GameRenderer"
+    "GameRenderer",
+    "Keyboard"
   ],
   "injectors": {
     "defaultRequire": 1

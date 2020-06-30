@@ -4,11 +4,13 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.text.LiteralText
 
 object Chat {
+    @JvmStatic
     fun normalMessage(msg: String){
         MinecraftClient.getInstance().inGameHud.chatHud
             .addMessage(LiteralText(msg))
     }
 
+    @JvmStatic
     fun clientMessage(msg: String){
         try {
             MinecraftClient.getInstance().inGameHud.chatHud
@@ -16,6 +18,7 @@ object Chat {
         } catch (err:Exception) {}
     }
 
+    @JvmStatic
     fun errorMessage(msg: String){
         try {
             MinecraftClient.getInstance().inGameHud.chatHud
@@ -23,6 +26,7 @@ object Chat {
         } catch (err: Exception) {}
     }
 
+    @JvmStatic
     fun compare(a: String, b: String): Boolean{
         return a.toLowerCase().replace(" ", "") == b.toLowerCase().replace(" ", "")
     }

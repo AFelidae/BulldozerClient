@@ -9,9 +9,16 @@ class Help: Command {
     override val aliases = arrayOf("help")
 
     override fun onCommand(args: List<String>) {
-        for(cmd in Manager.commands){
-            Chat.clientMessage("-" + cmd.getName() + " " + syntax)
-            //mc. cmd.getName() + cmd.syntax
+        if(args.isNotEmpty()){ //Im really curious if whoever added the not version of isEmpty was on a quota
+            val mod = Manager.getModuleByName(args[1])
+            if(mod == null) Chat.errorMessage("The name of the module is wrong :(")
+            else {
+                Chat.clientMessage(mod.description)
+            }
+        } else {
+            for(cmd in Manager.commands){
+                Chat.clientMessage("-" + cmd.getName() + " " + cmd.syntax)
+            }
         }
     }
 }

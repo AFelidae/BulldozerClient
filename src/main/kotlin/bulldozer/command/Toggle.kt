@@ -1,25 +1,21 @@
 package bulldozer.command
 
-import bulldozer.Command;
-import bulldozer.Manager;
+import bulldozer.Command
+import bulldozer.Manager
 import bulldozer.utils.Chat
+import bulldozer.Module
 
 class Toggle : Command {
     override val aliases = arrayOf("toggle", "t")
     override val syntax = "[module]"
 
     override fun onCommand(args: List<String>) {
-        if(args.isEmpty()){
-            Chat.errorMessage("No module specified")
+        val mod: Module? = Manager.getModuleByName(args[0])
+        if(mod == null) Chat.errorMessage("The name of the module is wrong :(")
+        else {
+            mod.toggle()
+            Chat.clientMessage(mod.name + "has been toggled to " + if(mod.toggled) "On" else "Off")
             return
         }
-        for(mod in Manager.modules){
-            if (Chat.compare(mod.name,args[0])){
-                mod.toggle()
-                Chat.clientMessage(mod.name + "has been toggled to " + if(mod.toggled) "On" else "Off")
-                return
-            }
-        }
-        Chat.errorMessage("No module with name " + args[0] + " was found")
     }
 }

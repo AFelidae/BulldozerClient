@@ -18,10 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GameRenderer {
 
     @Inject(at = @At("HEAD"), method = "renderHand(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/Camera;F)V", cancellable = true)
-    private void renderHand(MatrixStack matrixStack_1, Camera camera_1, float float_1, CallbackInfo info) {
+    private void renderHand(MatrixStack matrixStack_1, Camera camera_1, float float_1, CallbackInfo callback) {
         Render3D event = new Render3D();
         Manager.eventSystem.post(event);
-        if (event.isCancelled()) info.cancel();
+        if (event.isCancelled()) callback.cancel();
     }
 
     @Redirect(
