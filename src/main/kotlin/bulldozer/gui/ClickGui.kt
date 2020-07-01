@@ -11,7 +11,7 @@ class ClickGui : Screen {
     private var scroll = 0
 
     constructor() : super(LiteralText("Bulldozer Gui")) {
-        for(i in 0..25){
+        for(i in 1..26){
             var letter = getCharForNumber(i)
             var letterMods: ArrayList<Module> = ArrayList<Module>()
             for(mod in Manager.modules){
@@ -23,7 +23,7 @@ class ClickGui : Screen {
 
     private fun getCharForNumber(num: Int): String {
         val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        return if(num in 1..26) alphabet.substring(num,num+1) else " "
+        return if(num in 1..26) alphabet.substring(num-1,num) else " "
     }
 
     override fun isPauseScreen(): Boolean {
