@@ -2,8 +2,9 @@ package bulldozer.command
 
 import bulldozer.Command
 import bulldozer.Manager
+import bulldozer.Manager.getModule
+import bulldozer.module.Gui
 import bulldozer.utils.Chat
-import net.minecraft.client.util.InputUtil
 
 class Bind : Command {
 
@@ -12,8 +13,9 @@ class Bind : Command {
 
     override fun onCommand(args: List<String>) {
         if(args.isNotEmpty()) {
-            Manager.binding = true
-            Manager.bindname = args[0]
+            val bg = getModule(Gui::class.java) as Gui?
+            bg!!.binding = true
+            bg.selected = Manager.getModuleByName(args[0])!!
             Chat.clientMessage("Press a key to bind " + args[0])
         }
     }

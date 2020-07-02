@@ -5,11 +5,6 @@ import bulldozer.module.*
 import bulldozer.utils.Chat
 import com.google.common.eventbus.EventBus
 import java.lang.Exception
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
-import java.lang.Error
-import bulldozer.Module
-import bulldozer.Command
-import bulldozer.gui.ClickGui
 
 object Manager {
     @kotlin.jvm.JvmField
@@ -20,6 +15,7 @@ object Manager {
     open var bindname = ""
 
     var modules = arrayOf(
+        Gui(),
         Flight3d(),
         FlightStatic(),
         Zoom())
