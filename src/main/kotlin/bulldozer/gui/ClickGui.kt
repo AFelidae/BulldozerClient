@@ -1,10 +1,10 @@
 package bulldozer.gui
 
 import bulldozer.Manager
+import bulldozer.Module
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.LiteralText
-import bulldozer.Module
 
 class ClickGui : Screen {
     private var tabs: ArrayList<Tab> = ArrayList<Tab>();
@@ -40,6 +40,38 @@ class ClickGui : Screen {
             fromTop += tab.render(matrix,mouseX,mouseY,fromTop)
         }
         // widthOfSettings =
+    }
+
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, delta: Double): Boolean {
+        // scrollbar
+        scroll -= delta.toInt() * 10
+        return super.mouseScrolled(mouseX, mouseY, delta)
+    }
+
+    override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
+        for(t in tabs){
+            if (button == 0) {
+                t.leftClick = true
+                t.leftHeld = true
+            } else if(button == 1) {
+                t.rightClick = true
+                t.rightHeld = true
+            }
+        }
+        return super.mouseClicked(mouseX, mouseY, button)
+    }
+
+    override fun mouseReleased(mouseX: Double, mouseY: Double, button: Int): Boolean {
+        for(t in tabs){
+            if (button == 0) {
+                t.leftClick = false
+                t.leftHeld = false
+            } else if(button == 1) {
+                t.rightClick = false
+                t.rightHeld = false
+            }
+        }
+        return super.mouseReleased(mouseX, mouseY, button)
     }
 
     /*
@@ -111,9 +143,6 @@ class ClickGui : Screen {
         return ""
     }
 
-    protected fun mouseOver(minX: Int, minY: Int, maxX: Int, maxY: Int): Boolean {
-        return mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY < maxY
-    }
 
     fun fillReverseGrey(matrix: MatrixStack?, x1: Int, y1: Int, x2: Int, y2: Int) {
         fill(matrix, x1, y1, x1 + 1, y2 - 1, -0x70000000)
@@ -126,22 +155,7 @@ class ClickGui : Screen {
         fill(matrix, x2 - 1, y1 + 1, x2, y2, -0x6f4f4f50)
     }
 
-    override fun mouseClicked(
-        p_mouseClicked_1_: Double,
-        p_mouseClicked_3_: Double,
-        p_mouseClicked_5_: Int
-    ): Boolean {
-        if (p_mouseClicked_5_ == 0) {
-            lmDown = true
-            lmHeld = true
-        } else if (p_mouseClicked_5_ == 1) rmDown = true
-        return super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_)
-    }
 
-    override fun mouseReleased(double_1: Double, double_2: Double, int_1: Int): Boolean {
-        if (int_1 == 0) lmHeld = false
-        return super.mouseReleased(double_1, double_2, int_1)
-    }
 
     override fun keyPressed(int_1: Int, int_2: Int, int_3: Int): Boolean {
         keyDown = int_1

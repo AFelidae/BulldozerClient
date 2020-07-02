@@ -9,6 +9,7 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 import java.lang.Error
 import bulldozer.Module
 import bulldozer.Command
+import bulldozer.gui.ClickGui
 
 object Manager {
     @kotlin.jvm.JvmField

@@ -12,9 +12,6 @@ import kotlin.reflect.typeOf
 @Suppress("unused")
 class Client : ClientModInitializer {
     override fun onInitializeClient() {
-        var x = Boolean
-        var y = Int
-        println(x)
-        println(y)
+
     }
 }
