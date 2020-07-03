@@ -2,6 +2,9 @@ package bulldozer.utils
 
 enum class ContainerType {
     CHEST,
+    ENDERCHEST,
     REDSTONE,
-    OTHER
+    SHULKER,
+    OTHER,
+    NOT
 }

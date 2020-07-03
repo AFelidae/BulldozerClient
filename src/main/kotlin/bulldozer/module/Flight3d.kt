@@ -7,7 +7,7 @@ import com.google.common.eventbus.Subscribe
 import bulldozer.utils.VectorUtil
 import net.minecraft.util.math.Vec3d
 
-class Flight3d: Module("flight3d", "Fly at where you aim", arrayOf(
+class Flight3d: Module("Flight3d", arrayOf(
     Setting("speed", 1.0, 0.0, 3.0),
     Setting("levitate", true))) {
     @Subscribe

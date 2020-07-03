@@ -7,7 +7,7 @@ import com.google.common.eventbus.Subscribe
 import bulldozer.utils.VectorUtil
 import net.minecraft.util.math.Vec3d
 
-class FlightStatic: Module("flightstatic", "Fly around the map", arrayOf(Setting("speed", 1.0, 0.0, 3.0))) {
+class FlightStatic: Module("FlightStatic", arrayOf(Setting("speed", 1.0, 0.0, 3.0))) {
     @Subscribe
     fun onTick(event: Tick){
         if(toggled){

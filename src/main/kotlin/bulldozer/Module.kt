@@ -9,13 +9,11 @@ open class Module {
     var toggled = false
     var key = -2
     var name: String
-    var description: String
     var settings: Array<Setting>
     var mc: MinecraftClient = MinecraftClient.getInstance()
 
-    constructor(n: String, d: String, s: Array<Setting>){
+    constructor(n: String, s: Array<Setting>){
         name = n
-        description = d
         settings = s
         Manager.eventSystem.register(this)
     }

@@ -4,7 +4,7 @@ import bulldozer.Manager
 import bulldozer.Module
 import bulldozer.gui.Setting
 
-class Zoom: Module("zoom", "Fly around the map", arrayOf(Setting("zoom", 2.0f, 1.0f, 64.0f))) {
+class Zoom: Module("Zoom", arrayOf(Setting("zoom", 2.0f, 1.0f, 64.0f))) {
     open var level: Float = 1.0f
 
 
