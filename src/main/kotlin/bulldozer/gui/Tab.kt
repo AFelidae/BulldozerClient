@@ -6,13 +6,12 @@ import bulldozer.module.Gui
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
 
 class Tab (title:String,children:ArrayList<Module>){
     val name = title
     val mc: MinecraftClient = MinecraftClient.getInstance()
     private val modules = children
-    var collapsed = true
+    private var collapsed = true
 
     fun render(matrix: MatrixStack?, mouseX: Int, mouseY: Int, offset: Int, leftClick: Boolean, rightClick: Boolean): Int{
         val width = mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100)

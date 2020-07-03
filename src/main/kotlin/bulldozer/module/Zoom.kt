@@ -1,6 +1,5 @@
 package bulldozer.module
 
-import bulldozer.Manager
 import bulldozer.Module
 import bulldozer.gui.Setting
 

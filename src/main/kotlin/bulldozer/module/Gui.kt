@@ -1,10 +1,8 @@
 package bulldozer.module
 
 import bulldozer.Module
-import bulldozer.gui.ClickGui
-import net.minecraft.client.MinecraftClient
 
-class Gui:  Module("BulldozerGui", emptyArray()) {
+class Gui:  Module("Gui", emptyArray()) {
     @kotlin.jvm.JvmField
     var binding = false
     lateinit var selected: Module
