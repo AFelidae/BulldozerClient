@@ -11,6 +11,10 @@ import net.minecraft.text.LiteralText
 class ClickGui : Screen {
     private var tabs: ArrayList<Tab> = ArrayList<Tab>();
     private var scroll = 0
+    private var leftClick = false
+    private var rightClick = false
+    private var leftHeld = false
+    private var rightHeld = false
 
     constructor() : super(LiteralText("Bulldozer Gui")) {
         var gui = getModule(Gui::class.java) as Gui
@@ -41,14 +45,12 @@ class ClickGui : Screen {
 
         var fromTop = -scroll
         for(tab in tabs){
-            fromTop += tab.render(matrix,mouseX,mouseY,fromTop)
+            fromTop += tab.render(matrix,mouseX,mouseY,fromTop,leftClick,rightClick)
+            //mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100)
         }
 
-        var gui = getModule(Gui::class.java) as Gui
-        if(gui.selected != null){
-            //View selected stuffs
-        }
-
+        leftClick = false
+        rightClick = false
     }
 
     override fun mouseScrolled(mouseX: Double, mouseY: Double, delta: Double): Boolean {
@@ -58,27 +60,23 @@ class ClickGui : Screen {
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        for(t in tabs){
-            if (button == 0) {
-                t.leftClick = true
-                t.leftHeld = true
-            } else if(button == 1) {
-                t.rightClick = true
-                t.rightHeld = true
-            }
+        if (button == 0) {
+            leftClick = true
+            leftHeld = true
+        } else if(button == 1) {
+            rightClick = true
+            rightHeld = true
         }
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
     override fun mouseReleased(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        for(t in tabs){
-            if (button == 0) {
-                t.leftClick = false
-                t.leftHeld = false
-            } else if(button == 1) {
-                t.rightClick = false
-                t.rightHeld = false
-            }
+        if (button == 0) {
+            leftClick = false
+            leftHeld = false
+        } else if(button == 1) {
+            rightClick = false
+            rightHeld = false
         }
         return super.mouseReleased(mouseX, mouseY, button)
     }

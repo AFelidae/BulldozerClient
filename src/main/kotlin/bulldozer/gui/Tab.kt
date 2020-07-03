@@ -1,6 +1,8 @@
 package bulldozer.gui
 
+import bulldozer.Manager
 import bulldozer.Module
+import bulldozer.module.Gui
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
@@ -11,14 +13,9 @@ class Tab (title:String,children:ArrayList<Module>){
     val mc: MinecraftClient = MinecraftClient.getInstance()
     private val modules = children
     var collapsed = true
-    var leftClick = false
-    var rightClick = false
-    var leftHeld = false
-    var rightHeld = false
 
-    fun render(matrix: MatrixStack?, mouseX: Int, mouseY: Int, offset: Int): Int{
-        val width = mc.window.framebufferWidth - 100 - (mc.window.framebufferWidth % 100)
-
+    fun render(matrix: MatrixStack?, mouseX: Int, mouseY: Int, offset: Int, leftClick: Boolean, rightClick: Boolean): Int{
+        val width = mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100)
         var height = 30
         val overHeader = hover(mouseX, mouseY, 0, offset, width, offset+30)
         if(overHeader && rightClick) collapsed = !collapsed
@@ -35,7 +32,8 @@ class Tab (title:String,children:ArrayList<Module>){
                     if(leftClick){
                         mod.toggle()
                     }else if(rightClick){
-                        //TODO: Make selected module and add settings panel
+                        var gui = Manager.getModule(Gui::class.java) as Gui
+                        gui.selected = mod
                     }
                 }
                 if(mod.toggled) Screen.fill(matrix, 100 * x, offset + height, 100 * (x+1), offset + height + 20, if(overModule) 0x70CC4444 else 0x70CC2222)
@@ -49,23 +47,11 @@ class Tab (title:String,children:ArrayList<Module>){
             }
             if(modules.size > 0) height += 20
         }
-        leftClick = false
-        rightClick = false
         return height
     }
 
     private fun hover(mouseX: Int, mouseY: Int, x1: Int, y1: Int, x2: Int, y2: Int): Boolean{
         if(mouseX in x1..x2 && mouseY in y1..y2) return true
         return false
-    }
-
-    fun click(isLeftButton: Boolean, isPressed: Boolean){
-        if(isLeftButton){
-            leftClick = isPressed
-            leftHeld = isPressed
-        }else{
-            rightClick = isPressed
-            rightHeld = isPressed
-        }
     }
 }
