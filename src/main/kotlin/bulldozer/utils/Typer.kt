@@ -17,7 +17,8 @@ object Typer {
 
     fun entity(e: Entity) : EntityType{
         if(e == mc.player || e == mc.cameraEntity) return EntityType.USER
-        if (e is ItemEntity) return EntityType.ITEM
+        if(e is ItemEntity) return EntityType.ITEM
+        if(!e.isAttackable) return EntityType.OTHER
         if(mc.player!!.isTeammate(e)) return EntityType.TEAMMATE
         if(e is ChestMinecartEntity || e is FurnaceMinecartEntity || e is HopperMinecartEntity || e is ItemFrameEntity) return EntityType.STORAGE
         if(e is PlayerEntity) return EntityType.PLAYER

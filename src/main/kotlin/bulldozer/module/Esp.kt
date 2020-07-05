@@ -16,14 +16,16 @@ class Esp : Module("Esp", arrayOf(
     Setting("Friend", true),
     Setting("Item", true),
     Setting("Other", false),
-    Setting("Opacity", 0.3f, 0f, 1f)
-    )){
+    Setting("Opacity", 0.3f, 0f, 1f),
+    Setting("ShowInvisible", true))){
 
     @Subscribe
     fun onRender(event: Render3D){
         if(!toggled) return
         var opacity = settings[7].value as Float
         for(e in mc.world!!.entities){
+            if(!e.isAttackable) continue
+            if(e.isInvisible && !(settings[7].value as Boolean)) continue
             when(Typer.entity(e)){
                 EntityType.ANIMAL -> {
                     if(settings[0].value as Boolean) DrawUtil.entityBox(e,0f, 0.8f, 0f, opacity)
