@@ -20,6 +20,7 @@ object Manager {
         Gui(),
         Flight3d(),
         FlightStatic(),
+        Tracers(),
         Zoom())
 
     var commands = arrayOf(

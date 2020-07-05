@@ -23,9 +23,9 @@ object Typer {
         if(e is ChestMinecartEntity || e is FurnaceMinecartEntity || e is HopperMinecartEntity || e is ItemFrameEntity) return EntityType.STORAGE
         if(e is PlayerEntity) return EntityType.PLAYER
         if(e is WolfEntity)
-            if(Friend.isFriend((e as WolfEntity).ownerUuid!!)) return EntityType.FRIEND
+            if(Friend.isFriend((e as WolfEntity).ownerUuid)) return EntityType.FRIEND
         if(e is CatEntity)
-            if(Friend.isFriend((e as CatEntity).ownerUuid!!)) return EntityType.FRIEND
+            if(Friend.isFriend((e as CatEntity).ownerUuid)) return EntityType.FRIEND
         if(e.type.spawnGroup.isAnimal) return EntityType.ANIMAL
         if(!e.type.spawnGroup.isPeaceful) return EntityType.MONSTER
         return EntityType.OTHER

@@ -1,5 +1,6 @@
 package bulldozer.utils
 
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.Tessellator
 import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.render.WorldRenderer
@@ -58,17 +59,26 @@ object DrawUtil {
     }
     
 
-    fun drawLine(x1: Double, y1: Double, z1: Double, x2: Double, y2: Double, z2: Double, r: Float, g: Float, b: Float, t: Float) {
+    fun drawLine(x1: Double, y1: Double, z1: Double, x2: Double, y2: Double, z2: Double, r: Float, g: Float, b: Float, a: Float, t: Float) {
         gl11Setup()
         GL11.glLineWidth(t)
         val tessellator = Tessellator.getInstance()
         val buffer = tessellator.buffer
         buffer.begin(3, VertexFormats.POSITION_COLOR)
         buffer.vertex(x1, y1, z1).color(r, g, b, 0.0f).next()
-        buffer.vertex(x1, y1, z1).color(r, g, b, 1.0f).next()
-        buffer.vertex(x2, y2, z2).color(r, g, b, 1.0f).next()
+        buffer.vertex(x1, y1, z1).color(r, g, b, a).next()
+        buffer.vertex(x2, y2, z2).color(r, g, b, a).next()
         tessellator.draw()
         gl11Cleanup()
+    }
+
+    fun entityLine(entity: Entity, r: Float, g:Float, b:Float, a:Float, t:Float){
+        val mc :MinecraftClient = MinecraftClient.getInstance()
+        val forward = VectorUtil.forwardVector3D()
+        val towardX = forward.x * 4
+        val towardY = forward.y * 4
+        val towardZ = forward.z * 4
+        drawLine(mc.player!!.x + towardX, mc.player!!.eyeY + forward.y, mc.player!!.z + towardZ, entity.x, entity.y, entity.z, r, g, b, a, t)
     }
 
     private fun offsetRender() {
