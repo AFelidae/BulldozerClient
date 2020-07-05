@@ -14,7 +14,7 @@ class Toggle : Command {
         if(mod == null) Chat.errorMessage("The name of the module is wrong :(")
         else {
             mod.toggle()
-            Chat.clientMessage(mod.name + "has been toggled to " + if(mod.toggled) "On" else "Off")
+            Chat.clientMessage(mod.name + " has been toggled to " + if(mod.toggled) "On" else "Off")
             return
         }
     }
