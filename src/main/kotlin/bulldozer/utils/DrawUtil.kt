@@ -78,6 +78,8 @@ object DrawUtil {
         val towardX = forward.x * 4
         val towardY = forward.y * 4
         val towardZ = forward.z * 4
+
+
         drawLine(mc.player!!.x + towardX, mc.player!!.eyeY + forward.y, mc.player!!.z + towardZ, entity.x, entity.y, entity.z, r, g, b, a, t)
     }
 

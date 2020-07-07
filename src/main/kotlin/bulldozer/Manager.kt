@@ -16,6 +16,7 @@ object Manager {
 
     var modules = arrayOf(
         Brightness(),
+        ChestEsp(),
         Esp(),
         Gui(),
         Flight3d(),

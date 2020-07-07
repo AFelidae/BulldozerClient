@@ -1,6 +1,6 @@
 package bulldozer.utils
 
-import net.minecraft.block.*
+import net.minecraft.block.entity.*
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ItemEntity
@@ -29,15 +29,14 @@ object Typer {
         if(e.type.spawnGroup.isAnimal) return EntityType.ANIMAL
         if(!e.type.spawnGroup.isPeaceful) return EntityType.MONSTER
         return EntityType.OTHER
-
     }
 
-    fun container(b: Block): ContainerType{
-        if(b is ShulkerBoxBlock) return ContainerType.SHULKER
-        if(b is ChestBlock || b is TrappedChestBlock || b is BarrelBlock) return ContainerType.CHEST
-        if(b is DispenserBlock || b is DropperBlock || b is HopperBlock) return ContainerType.REDSTONE
-        if(b is FurnaceBlock || b is BlastFurnaceBlock || b is SmokerBlock || b is EnchantingTableBlock || b is BrewingStandBlock) return ContainerType.OTHER
-        if(b is EnderChestBlock) return ContainerType.ENDERCHEST
+    fun container(b: BlockEntity): ContainerType{
+        if(b is ShulkerBoxBlockEntity) return ContainerType.SHULKER
+        if(b is ChestBlockEntity || b is TrappedChestBlockEntity || b is BarrelBlockEntity) return ContainerType.CHEST
+        if(b is DispenserBlockEntity || b is DropperBlockEntity || b is HopperBlockEntity) return ContainerType.REDSTONE
+        if(b is FurnaceBlockEntity || b is BlastFurnaceBlockEntity || b is SmokerBlockEntity || b is EnchantingTableBlockEntity || b is BrewingStandBlockEntity) return ContainerType.OTHER
+        if(b is EnderChestBlockEntity) return ContainerType.ENDERCHEST
         return ContainerType.NOT
     }
 }
