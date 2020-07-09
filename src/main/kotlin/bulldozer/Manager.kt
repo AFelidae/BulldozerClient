@@ -22,6 +22,7 @@ object Manager {
         Flight3d(),
         FlightStatic(),
         KillAura(),
+        Sneak(),
         Tracers(),
         Zoom())
 

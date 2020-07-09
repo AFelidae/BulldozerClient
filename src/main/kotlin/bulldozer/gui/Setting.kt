@@ -6,6 +6,7 @@ class Setting {
     lateinit var value: Any
     lateinit var minimum: Any
     lateinit var maximum: Any
+    lateinit var modes: Array<String>
 
     constructor(text: String, default: Boolean){
         name = text
@@ -32,6 +33,11 @@ class Setting {
         value = default
         minimum = min
         maximum = max
+    }
 
+    constructor(text: String, options: Array<String>){
+        name = text
+        modes = options
+        value = 0
     }
 }

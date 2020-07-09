@@ -28,9 +28,19 @@ class Adjust : Command {
                                         return
                                     }
                                     if (set.value is Int) {
-                                        set.value = args[2].toInt()
-                                        Chat.clientMessage(args[1] + " was set to (int) " + args[2])
-                                        return
+                                        if(set.modes == null){ //Actual int storage
+                                            set.value = args[2].toInt()
+                                            Chat.clientMessage(args[1] + " was set to (int) " + args[2])
+                                            return
+                                        }else{ //Modes storage
+                                            for(i in 0..set.modes.size-1){
+                                                if(Chat.compare(set.modes[i], args[2])){
+                                                    set.value = i
+                                                    Chat.clientMessage(args[1] + " was set to (mode) " + args[2])
+                                                    return
+                                                }
+                                            }
+                                        }
                                     }
                                     if (set.value is Double) {
                                         set.value = args[2].toDouble()
