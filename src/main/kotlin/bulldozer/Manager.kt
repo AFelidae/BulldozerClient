@@ -21,6 +21,7 @@ object Manager {
         Gui(),
         Flight3d(),
         FlightStatic(),
+        Freecam(),
         KillAura(),
         Sneak(),
         Tracers(),
