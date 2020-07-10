@@ -27,6 +27,8 @@ class Adjust : Command {
                                         Chat.clientMessage(set.name + " is currently (double) " + set.value.toString())
                                     is SettingFloat ->
                                         Chat.clientMessage(set.name + " is currently (float) " + set.value.toString())
+                                    is SettingString ->
+                                        Chat.clientMessage(set.name + "is currently (string) " + set.value)
                                 }
                     }
                     3 -> {
@@ -61,6 +63,10 @@ class Adjust : Command {
                                         is SettingFloat -> {
                                             set.value = args[2].toFloat()
                                             Chat.clientMessage(args[1] + " was set to (float) " + args[2])
+                                        }
+                                        is SettingString -> {
+                                            set.value = args[2]
+                                            Chat.clientMessage(args[1] + " was set to (string) " + args[2])
                                         }
                                     }
                                     Chat.errorMessage("Setting value is that of an unsupported type")
