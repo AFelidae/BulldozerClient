@@ -13,7 +13,7 @@ class Ambience : Module("Ambience", arrayOf(
     SettingBoolean("LockWeather", true),
     SettingBoolean("LockTime", false),
     SettingMode("Weather",arrayOf("Clear", "Rain")),
-    SettingFloat("Visibility", 0f, 0f, 2f),
+    SettingFloat("Visibility", 1f, 0f, 2f),
     SettingInt("Time",12500,0,24000)
 )){
     @Subscribe
