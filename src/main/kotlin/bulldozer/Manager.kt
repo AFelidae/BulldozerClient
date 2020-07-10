@@ -15,6 +15,7 @@ object Manager {
     open var bindname = ""
 
     var modules = arrayOf(
+        Ambience(),
         Brightness(),
         ChestEsp(),
         Esp(),
