@@ -2,7 +2,8 @@ package bulldozer.module
 
 import bulldozer.Module
 import bulldozer.events.Tick
-import bulldozer.gui.Setting
+import bulldozer.gui.SettingBoolean
+import bulldozer.gui.SettingDouble
 import bulldozer.utils.EntityType
 import bulldozer.utils.Typer
 import com.google.common.eventbus.Subscribe
@@ -14,14 +15,14 @@ import kotlin.math.sqrt
 
 
 class KillAura : Module("KillAura", arrayOf(
-    Setting("Animal", false),
-    Setting("Monster", false),
-    Setting("Player", true),
-    Setting("Other", false),
-    Setting("HitInvisible", true),
-    Setting("HitTeammate", true),
-    Setting("HitFriend", true),
-    Setting("Range", 3.8, 0.0, 6.0))){
+    SettingBoolean("Animal", false),
+    SettingBoolean("Monster", false),
+    SettingBoolean("Player", true),
+    SettingBoolean("Other", false),
+    SettingBoolean("HitInvisible", true),
+    SettingBoolean("HitTeammate", true),
+    SettingBoolean("HitFriend", true),
+    SettingDouble("Range", 3.8, 0.0, 6.0))){
 
     private fun getDistance(entity: Entity): Double{
         if(entity.y > mc.player!!.eyeY){ //Above player
@@ -51,7 +52,7 @@ class KillAura : Module("KillAura", arrayOf(
         if(mc.player!!.getAttackCooldownProgress(mc.tickDelta) != 1f) return
 
         var closest: Entity? = null;
-        var range = settings[7].value as Double
+        var range = (settings[7] as SettingDouble).value
 
         for(e in mc.world!!.entities){
             var failed = false
@@ -59,28 +60,28 @@ class KillAura : Module("KillAura", arrayOf(
             if(!e.isAttackable) continue
             when(Typer.entity(e)){
                 EntityType.ANIMAL -> {
-                    if(!(settings[0].value as Boolean)) failed = true
+                    if(!(settings[0] as SettingBoolean).value) failed = true
                 }
                 EntityType.MONSTER -> {
-                    if(!(settings[1].value as Boolean)) failed = true
+                    if(!(settings[1] as SettingBoolean).value) failed = true
                 }
                 EntityType.PLAYER -> {
-                    if(!(settings[2].value as Boolean)) failed = true
+                    if(!(settings[2] as SettingBoolean).value) failed = true
                 }
                 EntityType.OTHER -> {
-                    if(!(settings[3].value as Boolean)) failed = true
+                    if(!(settings[3] as SettingBoolean).value) failed = true
                 }
                 EntityType.TEAMMATE -> {
-                    if(!(settings[5].value as Boolean)) failed = true
+                    if(!((settings[5] as SettingBoolean).value)) failed = true
                 }
                 EntityType.FRIEND -> {
-                    if(!(settings[6].value as Boolean)) failed = true
+                    if(!(settings[6] as SettingBoolean).value) failed = true
                 }
                 EntityType.USER -> {
                     failed = true
                 }
             }
-            if(e.isInvisible && !(settings[4].value as Boolean)) failed = true
+            if(e.isInvisible && !(settings[4] as SettingBoolean).value) failed = true
             if(failed) continue
 
             val distance = getDistance(e)

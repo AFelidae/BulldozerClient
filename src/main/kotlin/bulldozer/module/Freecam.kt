@@ -2,21 +2,19 @@ package bulldozer.module
 
 import bulldozer.Module
 import bulldozer.events.ClientMove
-import bulldozer.events.Render3D
 import bulldozer.events.SendPacket
 import bulldozer.events.Tick
-import bulldozer.gui.Setting
+import bulldozer.gui.SettingDouble
 import bulldozer.utils.VectorUtil
 import com.google.common.eventbus.Subscribe
 import net.minecraft.client.network.OtherClientPlayerEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket
 import net.minecraft.util.math.Vec3d
 
 
 class Freecam: Module("Freecam", arrayOf(
-    Setting("Speed", 2.0, 0.0, 5.0)
+    SettingDouble("Speed", 2.0, 0.0, 5.0)
 )) {
     private var freecamEntity: OtherClientPlayerEntity? = null // OtherClientPlayerEntity(mc.world,mc.player!!.gameProfile)
 
@@ -49,7 +47,7 @@ class Freecam: Module("Freecam", arrayOf(
     @Subscribe
     fun onTick(event: Tick){
         if(toggled && freecamEntity != null){
-            val speed: Double = settings[0].value as Double
+            val speed: Double = (settings[0] as SettingDouble).value
             var freecamVel = Vec3d(0.0, 0.0, 0.0) //TODO: replace all instances of this with Vec3d.ZERO
             if(mc.options.keyForward.isPressed)
                 freecamVel = freecamVel.add(VectorUtil.forwardVector2D())

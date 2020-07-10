@@ -2,16 +2,16 @@ package bulldozer.module
 
 import bulldozer.Module
 import bulldozer.events.Tick
-import bulldozer.gui.Setting
+import bulldozer.gui.SettingDouble
 import com.google.common.eventbus.Subscribe
 import bulldozer.utils.VectorUtil
 import net.minecraft.util.math.Vec3d
 
-class FlightStatic: Module("FlightStatic", arrayOf(Setting("speed", 1.0, 0.0, 3.0))) {
+class FlightStatic: Module("FlightStatic", arrayOf(SettingDouble("speed", 1.0, 0.0, 3.0))) {
     @Subscribe
     fun onTick(event: Tick){
         if(toggled){
-            val speed: Double = settings[0].value as Double
+            val speed: Double = (settings[0] as SettingDouble).value
             var newVel = Vec3d(0.0, 0.0, 0.0)
             if(mc.options.keyForward.isPressed)
                 newVel = newVel.add(VectorUtil.forwardVector2D())

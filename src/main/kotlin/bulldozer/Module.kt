@@ -1,7 +1,6 @@
 package bulldozer
 
 import bulldozer.events.KeyPress
-import bulldozer.gui.Setting
 import com.google.common.eventbus.Subscribe
 import net.minecraft.client.MinecraftClient
 
@@ -9,10 +8,10 @@ open class Module {
     var toggled = false
     var key = -2
     var name: String
-    var settings: Array<Setting>
+    var settings: Array<Any>
     var mc: MinecraftClient = MinecraftClient.getInstance()
 
-    constructor(n: String, s: Array<Setting>){
+    constructor(n: String, s: Array<Any>){
         name = n
         settings = s
         Manager.eventSystem.register(this)
