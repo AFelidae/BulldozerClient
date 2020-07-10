@@ -8,7 +8,7 @@ class Zoom: Module("Zoom", arrayOf(SettingFloat("zoom", 2.0f, 1.0f, 64.0f))) {
 
 
     override fun onEnable(){
-        level = settings[0].value as Float
+        level = (settings[0] as SettingFloat).value
     }
 
     override fun onDisable(){
