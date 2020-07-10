@@ -1,7 +1,7 @@
 package bulldozer.gui
 
-class SettingDouble {
-    val name: String
+class SettingDouble : SettingGenericBase {
+    override val name: String
     var value: Double
     val minimum: Double
     val maximum: Double

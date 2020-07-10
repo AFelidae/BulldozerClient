@@ -1,7 +1,7 @@
 package bulldozer.gui
 
-class SettingString {
-    val name: String
+class SettingString: SettingGenericBase {
+    override val name: String
     var value: String
 
     constructor(text: String, default: String){

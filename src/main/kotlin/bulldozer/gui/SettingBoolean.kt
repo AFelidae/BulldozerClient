@@ -1,6 +1,6 @@
 package bulldozer.gui
 
-class SettingBoolean {
+class SettingBoolean{
     val name: String
     var value: Boolean
 

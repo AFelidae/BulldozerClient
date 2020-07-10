@@ -1,7 +1,7 @@
 package bulldozer.gui
 
-class SettingInt {
-    val name: String
+class SettingInt: SettingGenericBase {
+    override val name: String
     var value: Int
     val minimum: Int
     val maximum: Int

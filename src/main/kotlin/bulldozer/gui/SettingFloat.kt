@@ -1,7 +1,7 @@
 package bulldozer.gui
 
-class SettingFloat {
-    val name: String
+class SettingFloat: SettingGenericBase {
+    override val name: String
     var value: Float
     val minimum: Float
     val maximum: Float

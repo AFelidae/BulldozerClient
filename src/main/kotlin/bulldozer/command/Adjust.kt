@@ -2,6 +2,7 @@ package bulldozer.command
 
 import bulldozer.Command
 import bulldozer.Manager
+import bulldozer.gui.*
 import bulldozer.utils.Chat
 
 class Adjust : Command {
@@ -14,25 +15,36 @@ class Adjust : Command {
             else {
                 when (args.size) {
                     1 -> {
-                        for(set in mod.settings){
-                            Chat.clientMessage(set.name + " : " + set.value.toString())
-                        }
+                            for (set in mod.settings)
+                                when (set) {
+                                    is SettingBoolean ->
+                                        Chat.clientMessage(set.name + " is currently (boolean) " + set.value.toString())
+                                    is SettingInt ->
+                                        Chat.clientMessage(set.name + " is currently (int) " + set.value.toString())
+                                    is SettingMode ->
+                                        Chat.clientMessage(set.name + " is currently (mode) " + set.modes[set.value])
+                                    is SettingDouble ->
+                                        Chat.clientMessage(set.name + " is currently (double) " + set.value.toString())
+                                    is SettingFloat ->
+                                        Chat.clientMessage(set.name + " is currently (float) " + set.value.toString())
+                                }
                     }
                     3 -> {
                         for (set in mod.settings) {
-                            if (Chat.compare(set.name,args[1])) {
+                            if (Chat.compare((set as SettingGenericBase).name,args[1])) {
                                 try {
-                                    if (set.value is Boolean) {
-                                        set.value = args[2].toBoolean()
-                                        Chat.clientMessage(args[1] + " was set to (boolean) " + args[2])
-                                        return
-                                    }
-                                    if (set.value is Int) {
-                                        if(set.modes == null){ //Actual int storage
+                                    when (set) {
+                                        is SettingBoolean -> {
+                                            set.value = args[2].toBoolean()
+                                            Chat.clientMessage(args[1] + " was set to (boolean) " + args[2])
+                                            return
+                                        }
+                                        is SettingInt -> {
                                             set.value = args[2].toInt()
                                             Chat.clientMessage(args[1] + " was set to (int) " + args[2])
                                             return
-                                        }else{ //Modes storage
+                                        }
+                                        is SettingMode -> {
                                             for(i in 0..set.modes.size-1){
                                                 if(Chat.compare(set.modes[i], args[2])){
                                                     set.value = i
@@ -41,15 +53,15 @@ class Adjust : Command {
                                                 }
                                             }
                                         }
-                                    }
-                                    if (set.value is Double) {
-                                        set.value = args[2].toDouble()
-                                        Chat.clientMessage(args[1] + " was set to (double) " + args[2])
-                                        return
-                                    }
-                                    if (set.value is Float){
-                                        set.value = args[2].toFloat()
-                                        Chat.clientMessage(args[1] + " was set to (float) " + args[2])
+                                        is SettingDouble -> {
+                                            set.value = args[2].toDouble()
+                                            Chat.clientMessage(args[1] + " was set to (double) " + args[2])
+                                            return
+                                        }
+                                        is SettingFloat -> {
+                                            set.value = args[2].toFloat()
+                                            Chat.clientMessage(args[1] + " was set to (float) " + args[2])
+                                        }
                                     }
                                     Chat.errorMessage("Setting value is that of an unsupported type")
                                 } catch (err: Exception){

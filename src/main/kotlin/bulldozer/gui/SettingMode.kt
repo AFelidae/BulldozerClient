@@ -1,7 +1,7 @@
 package bulldozer.gui
 
-class SettingMode {
-    val name: String
+class SettingMode : SettingGenericBase{
+    override val name: String
     var value: Int //Index of mode
     var modes: Array<String>
 
