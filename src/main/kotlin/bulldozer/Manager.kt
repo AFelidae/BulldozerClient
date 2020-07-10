@@ -20,6 +20,7 @@ object Manager {
         ChestEsp(),
         Esp(),
         Gui(),
+        FallDamage(),
         Flight3d(),
         FlightStatic(),
         Freecam(),
