@@ -10,79 +10,72 @@ class Adjust : Command {
     override val syntax = "[module] | [module] [name of setting] [new value]"
 
     override fun onCommand(args: List<String>) {
-            val mod = Manager.getModuleByName(args[0])
-            if(mod === null) Chat.errorMessage("The name of the module is wrong :(")
-            else {
-                when (args.size) {
-                    1 -> {
-                            for (set in mod.settings)
-                                when (set) {
-                                    is SettingBoolean ->
-                                        Chat.clientMessage(set.name + " is currently (boolean) " + set.value.toString())
-                                    is SettingInt ->
-                                        Chat.clientMessage(set.name + " is currently (int) " + set.value.toString())
-                                    is SettingMode ->
-                                        Chat.clientMessage(set.name + " is currently (mode) " + set.modes[set.value])
-                                    is SettingDouble ->
-                                        Chat.clientMessage(set.name + " is currently (double) " + set.value.toString())
-                                    is SettingFloat ->
-                                        Chat.clientMessage(set.name + " is currently (float) " + set.value.toString())
-                                    is SettingString ->
-                                        Chat.clientMessage(set.name + "is currently (string) " + set.value)
-                                }
-                    }
-                    3 -> {
-                        for (set in mod.settings) {
-                            if (Chat.compare((set as SettingGenericBase).name,args[1])) {
-                                try {
-                                    when (set) {
-                                        is SettingBoolean -> {
-                                            set.value = args[2].toBoolean()
-                                            Chat.clientMessage(args[1] + " was set to (boolean) " + args[2])
-                                            return
-                                        }
-                                        is SettingInt -> {
-                                            set.value = args[2].toInt()
-                                            Chat.clientMessage(args[1] + " was set to (int) " + args[2])
-                                            return
-                                        }
-                                        is SettingMode -> {
-                                            for(i in 0..set.modes.size-1){
-                                                if(Chat.compare(set.modes[i], args[2])){
-                                                    set.value = i
-                                                    Chat.clientMessage(args[1] + " was set to (mode) " + args[2])
-                                                    return
-                                                }
-                                            }
-                                        }
-                                        is SettingDouble -> {
-                                            set.value = args[2].toDouble()
-                                            Chat.clientMessage(args[1] + " was set to (double) " + args[2])
-                                            return
-                                        }
-                                        is SettingFloat -> {
-                                            set.value = args[2].toFloat()
-                                            Chat.clientMessage(args[1] + " was set to (float) " + args[2])
-                                        }
-                                        is SettingString -> {
-                                            set.value = args[2]
-                                            Chat.clientMessage(args[1] + " was set to (string) " + args[2])
-                                        }
-                                    }
-                                    Chat.errorMessage("Setting value is that of an unsupported type")
-                                } catch (err: Exception){
-                                    Chat.errorMessage("Value couldn't be parsed... $err")
-                                }
-                                return
-                            }
+        val mod = Manager.getModuleByName(args[0])
+        if(mod == null){
+            Chat.clientMessage("Could not find module named " + args[0])
+            return
+        }
+        if(args.size == 1){
+            for(setting in mod.settings)
+                when(setting){
+                    is SettingBoolean ->
+                        Chat.clientMessage("Value of " + setting.name + " is (boolean) " + setting.value.toString())
+                    is SettingDouble ->
+                        Chat.clientMessage("Value of " + setting.name + " is (double) " + setting.value.toString())
+                    is SettingFloat ->
+                        Chat.clientMessage("Value of " + setting.name + " is (float) " + setting.value.toString())
+                    is SettingInt ->
+                        Chat.clientMessage("Value of " + setting.name + " is (int) " + setting.value.toString())
+                    is SettingMode -> {
+                        var s: String = ""
+                        for (m in setting.modes){
+                            s += " | $m"
                         }
-                        Chat.errorMessage("No setting with name " + args[1] + " was found")
-                        return
+                        Chat.clientMessage("Value of " + setting.name + " is (mode ("+s+")) " + setting.modes[setting.value])
                     }
-                    else -> {
-                        Chat.errorMessage("The syntax of the command is malformed")
+                    is SettingString ->
+                        Chat.clientMessage("Value of " + setting.name + " is (boolean) " + setting.value)
+            }
+        }
+        else if(args.size == 3) {
+            try {
+                val setting = mod.getSettingByName(args[1])
+                if(setting == null){
+                    Chat.clientMessage("Could not find setting named " + args[1])
+                    return
+                }
+                when(setting){
+                    is SettingBoolean -> {
+                        setting.value = args[2].toBoolean()
+                        Chat.clientMessage("Setting value " + setting.name + "changd to (boolean) " + setting.value.toString())
+                    }
+                    is SettingDouble -> {
+                        setting.value = args[2].toDouble()
+                        Chat.clientMessage("Setting value " + setting.name + "changd to (double) " + setting.value.toString())
+                    }
+                    is SettingFloat -> {
+                        setting.value = args[2].toFloat()
+                        Chat.clientMessage("Setting value " + setting.name + "changd to (float) " + setting.value.toString())
+                    }
+                    is SettingInt -> {
+                        setting.value = args[2].toInt()
+                        Chat.clientMessage("Setting value " + setting.name + "changd to (int) " + setting.value.toString())
+                    }
+                    is SettingMode -> {
+                        for(i in 1..setting.modes.size){
+                            if(Chat.compare(setting.modes[i-1],args[2])) setting.value = i-1
+                        }
+                        Chat.clientMessage("Setting value " + setting.name + "changd to (mode) " + setting.modes[setting.value])
+                    }
+                    is SettingString -> {
+                        setting.value = args[2]
+                        Chat.clientMessage("Setting value " + setting.name + "changd to (string) " + setting.value)
                     }
                 }
+            } catch (err: Exception) {
+                Chat.clientMessage("Couldn't convert text to the setting type")
             }
+        }
+        else Chat.clientMessage("Malformed command syntax")
     }
 }
