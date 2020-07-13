@@ -27,6 +27,7 @@ object Manager {
         KillAura(),
         Respawn(),
         Sneak(),
+        Totem(),
         Tracers(),
         Zoom())
 
