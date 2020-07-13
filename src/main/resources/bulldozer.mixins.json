@@ -9,7 +9,8 @@
     "ClientConnection",
     "ClientPlayerEntity",
     "GameRenderer",
-    "Keyboard"
+    "Keyboard",
+    "MinecraftClient"
   ],
   "injectors": {
     "defaultRequire": 1

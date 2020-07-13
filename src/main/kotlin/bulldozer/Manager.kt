@@ -25,6 +25,7 @@ object Manager {
         FlightStatic(),
         Freecam(),
         KillAura(),
+        Respawn(),
         Sneak(),
         Tracers(),
         Zoom())
