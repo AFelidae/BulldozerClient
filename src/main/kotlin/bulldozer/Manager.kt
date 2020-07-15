@@ -28,6 +28,7 @@ object Manager {
         Respawn(),
         Sneak(),
         Speed(),
+        Strafe(),
         Totem(),
         Tracers(),
         Zoom())
