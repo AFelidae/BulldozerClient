@@ -26,6 +26,7 @@ object Manager {
         Freecam(),
         KillAura(),
         Leap(),
+        Momentum(),
         Respawn(),
         Sneak(),
         Speed(),
