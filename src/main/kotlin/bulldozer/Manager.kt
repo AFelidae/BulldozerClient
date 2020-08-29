@@ -36,10 +36,12 @@ object Manager {
         Zoom())
 
     var commands = arrayOf(
+        About(),
         Adjust(),
         Bind(),
         Bottom(),
         DelBind(),
+        Disconnect(),
         Help(),
         Top(),
         Toggle())
