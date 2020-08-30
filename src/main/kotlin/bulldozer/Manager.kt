@@ -30,6 +30,7 @@ object Manager {
         Respawn(),
         Sneak(),
         Speed(),
+        Spider(),
         Step(),
         Strafe(),
         Totem(),
