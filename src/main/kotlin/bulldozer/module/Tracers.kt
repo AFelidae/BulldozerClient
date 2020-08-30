@@ -19,7 +19,7 @@ class Tracers : Module("Tracers", arrayOf(
     SettingBoolean("Other", false),
     SettingFloat("Opacity", 0.3f, 0f, 1f),
     SettingBoolean("ShowInvisible", true),
-    SettingBoolean("DistanceSize", true))){
+    SettingBoolean("DistanceSize", false))){
 
     @Subscribe
     fun onRender(event: Render3D){

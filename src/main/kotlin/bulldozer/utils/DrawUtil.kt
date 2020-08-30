@@ -75,12 +75,11 @@ object DrawUtil {
     fun entityLine(entity: Entity, r: Float, g:Float, b:Float, a:Float, t:Float){
         val mc :MinecraftClient = MinecraftClient.getInstance()
         val forward = VectorUtil.forwardVector3D()
-        val towardX = forward.x * 4
-        val towardY = forward.y * 4
-        val towardZ = forward.z * 4
 
 
-        drawLine(mc.player!!.x + towardX, mc.player!!.eyeY + forward.y, mc.player!!.z + towardZ, entity.x, entity.y, entity.z, r, g, b, a, t)
+
+
+        drawLine(mc.player!!.x + forward.x, mc.player!!.eyeY + forward.y, mc.player!!.z + forward.z, entity.x, entity.y, entity.z, r, g, b, a, t)
     }
 
     private fun offsetRender() {
