@@ -2,6 +2,7 @@ package bulldozer.mixins;
 
 import bulldozer.Manager;
 import bulldozer.events.Render3D;
+import bulldozer.gui.SettingFloat;
 import bulldozer.module.Zoom;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.render.Camera;
@@ -32,8 +33,8 @@ public class GameRenderer {
             method = {"getFov(Lnet/minecraft/client/render/Camera;FZ)D"})
     private double getFov(GameOptions options) {
         Zoom zoom = (Zoom) Manager.getModule(Zoom.class);
-        if(zoom == null) return options.fov;
-        return options.fov/zoom.getLevel();
+        if (zoom == null || !zoom.getToggled()) return options.fov;
+        return options.fov / ((SettingFloat) zoom.getSettings()[0]).getValue();
     }
 }
 
