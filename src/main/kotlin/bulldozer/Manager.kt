@@ -33,6 +33,7 @@ object Manager {
         Spider(),
         Step(),
         Strafe(),
+        Timer(),
         Totem(),
         Tracers(),
         Zoom())

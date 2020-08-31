@@ -10,7 +10,8 @@
     "ClientPlayerEntity",
     "GameRenderer",
     "Keyboard",
-    "MinecraftClient"
+    "MinecraftClient",
+    "RenderTickCounter"
   ],
   "injectors": {
     "defaultRequire": 1
