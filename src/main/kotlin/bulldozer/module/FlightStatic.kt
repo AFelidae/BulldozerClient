@@ -14,7 +14,7 @@ class FlightStatic: Module("FlightStatic", arrayOf(SettingDouble("speed", 1.0, 0
             val speed: Double = (settings[0] as SettingDouble).value
             var newVel = Vec3d(0.0, 0.0, 0.0)
             if(mc.options.keyForward.isPressed)
-                newVel = newVel.add(VectorUtil.forwardVector2D())
+                newVel = newVel.add(VectorUtil.forwardVector2D().multiply(speed))
             if(mc.options.keyBack.isPressed)
                 newVel = newVel.add(VectorUtil.forwardVector2D().rotateY(Math.PI.toFloat()).multiply(speed))
             if(mc.options.keyLeft.isPressed)
