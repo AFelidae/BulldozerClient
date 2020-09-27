@@ -22,7 +22,7 @@ class KillAura : Module("KillAura", arrayOf(
     SettingBoolean("HitInvisible", true),
     SettingBoolean("HitTeammate", true),
     SettingBoolean("HitFriend", true),
-    SettingDouble("Range", 3.8, 0.0, 6.0))){
+    SettingDouble("Range", 3.8, 3.0, 6.0))){
 
     private fun getDistance(entity: Entity): Double{
         if(entity.y > mc.player!!.eyeY){ //Above player

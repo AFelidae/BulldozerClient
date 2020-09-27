@@ -69,7 +69,9 @@ class ClickGui : Screen {
                     is SettingDouble -> {
                         val s: SettingDouble = gui.selected!!.settings[n] as SettingDouble
                         if(leftHeld && over){
-                            val percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            var percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            if(percent < 0.01) percent = 0f
+                            if(percent > 0.99) percent = 1f
                             s.value = (s.maximum - s.minimum) * percent + s.minimum
                         }
                         val percent = 1 - (s.value - s.minimum)/(s.maximum-s.minimum)
@@ -79,8 +81,11 @@ class ClickGui : Screen {
                     is SettingFloat -> {
                         val s: SettingFloat = gui.selected!!.settings[n] as SettingFloat
                         if(leftHeld && over){
-                            val percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            var percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            if(percent < 0.01) percent = 0f
+                            if(percent > 0.99) percent = 1f
                             s.value = (s.maximum - s.minimum) * percent + s.minimum
+
                         }
                         val percent = 1 - (s.value - s.minimum)/(s.maximum-s.minimum)
                         Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, (mc.window.scaledWidth + ((- 150 - (mc.window.scaledWidth % 100))*percent)).toInt() , (n+1)*20,  if(over) 0x70CC4444 else 0x70CC2222)
@@ -90,7 +95,9 @@ class ClickGui : Screen {
                     is SettingInt -> {
                         val s: SettingInt = gui.selected!!.settings[n] as SettingInt
                         if(leftHeld && over){
-                            val percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            var percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            if(percent < 0.01) percent = 0f
+                            if(percent > 0.99) percent = 1f
                             s.value = ((s.maximum - s.minimum) * percent + s.minimum).toInt()
                         }
                         val percent = 1 - (s.value - s.minimum)/(s.maximum-s.minimum)
