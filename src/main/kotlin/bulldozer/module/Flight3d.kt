@@ -9,8 +9,8 @@ import bulldozer.utils.VectorUtil
 import net.minecraft.util.math.Vec3d
 
 class Flight3d: Module("Flight3d", arrayOf(
-    SettingDouble("speed", 1.0, 0.0, 3.0),
-    SettingBoolean("levitate", true))) {
+    SettingDouble("Speed", 1.0, 0.0, 3.0),
+    SettingBoolean("Levitate", true))) {
     @Subscribe
     fun onTick(event: Tick){
         if(toggled){
