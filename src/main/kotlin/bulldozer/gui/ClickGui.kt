@@ -3,11 +3,12 @@ package bulldozer.gui
 import bulldozer.Manager
 import bulldozer.Manager.getModule
 import bulldozer.Module
-import bulldozer.mixins.MinecraftClient
 import bulldozer.module.Gui
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.LiteralText
+import kotlin.math.round
 
 class ClickGui : Screen {
     private var tabs: ArrayList<Tab> = ArrayList<Tab>();
@@ -40,7 +41,7 @@ class ClickGui : Screen {
     }
 
     override fun render(matrix: MatrixStack?, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        val mc: net.minecraft.client.MinecraftClient = net.minecraft.client.MinecraftClient.getInstance()
+        val mc: MinecraftClient = net.minecraft.client.MinecraftClient.getInstance()
 
         if(scroll < 0) scroll = 0
         this.renderBackground(matrix)
@@ -60,22 +61,54 @@ class ClickGui : Screen {
                 Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, mc.window.scaledWidth, (n+1)*20,  if(over) 0x70444444 else 0x70222222)
                 when(gui.selected!!.settings[n]){
                     is SettingBoolean -> {
-
+                        val s: SettingBoolean = gui.selected!!.settings[n] as SettingBoolean
+                        if(leftClick && over) s.value = !s.value
+                        if(s.value) Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, mc.window.scaledWidth, (n+1)*20,  if(over) 0x70CC4444 else 0x70CC2222)
+                        mc.textRenderer.drawWithShadow(matrix, s.name + ": " + s.value, (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
                     }
                     is SettingDouble -> {
-
+                        val s: SettingDouble = gui.selected!!.settings[n] as SettingDouble
+                        if(leftHeld && over){
+                            val percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            s.value = (s.maximum - s.minimum) * percent + s.minimum
+                        }
+                        val percent = 1 - (s.value - s.minimum)/(s.maximum-s.minimum)
+                        Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, (mc.window.scaledWidth + ((- 150 - (mc.window.scaledWidth % 100))*percent)).toInt() , (n+1)*20,  if(over) 0x70CC4444 else 0x70CC2222)
+                        mc.textRenderer.drawWithShadow(matrix, s.name + ": " + round((s.value * 1000).toDouble())/1000, (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
                     }
                     is SettingFloat -> {
+                        val s: SettingFloat = gui.selected!!.settings[n] as SettingFloat
+                        if(leftHeld && over){
+                            val percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            s.value = (s.maximum - s.minimum) * percent + s.minimum
+                        }
+                        val percent = 1 - (s.value - s.minimum)/(s.maximum-s.minimum)
+                        Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, (mc.window.scaledWidth + ((- 150 - (mc.window.scaledWidth % 100))*percent)).toInt() , (n+1)*20,  if(over) 0x70CC4444 else 0x70CC2222)
+                        mc.textRenderer.drawWithShadow(matrix, s.name + ": " + round((s.value * 10).toDouble())/10, (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
 
                     }
                     is SettingInt -> {
-
+                        val s: SettingInt = gui.selected!!.settings[n] as SettingInt
+                        if(leftHeld && over){
+                            val percent: Float = (mouseX - (mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100))).toFloat()/(150 + (mc.window.scaledWidth % 100)).toFloat()
+                            s.value = ((s.maximum - s.minimum) * percent + s.minimum).toInt()
+                        }
+                        val percent = 1 - (s.value - s.minimum)/(s.maximum-s.minimum)
+                        Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, (mc.window.scaledWidth + ((- 150 - (mc.window.scaledWidth % 100))*percent)).toInt() , (n+1)*20,  if(over) 0x70CC4444 else 0x70CC2222)
+                        mc.textRenderer.drawWithShadow(matrix, s.name + ": " + s.value, (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
                     }
                     is SettingMode -> {
+                        val s: SettingMode = gui.selected!!.settings[n] as SettingMode
+                        if(leftClick && over){
+                            s.value += 1
+                            s.value == s.value % s.modes.size
+                        }
+                        mc.textRenderer.drawWithShadow(matrix, s.name + ": " + s.modes[s.value], (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
 
                     }
                     is SettingString -> {
-
+                        val s: SettingString = gui.selected!!.settings[n] as SettingString
+                        mc.textRenderer.drawWithShadow(matrix, s.name + ": " + s.value, (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
                     }
                 }
             }
