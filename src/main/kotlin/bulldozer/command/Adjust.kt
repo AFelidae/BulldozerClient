@@ -34,7 +34,7 @@ class Adjust : Command {
                         Chat.clientMessage("Value of " + setting.name + " is (mode ("+s+")) " + setting.modes[setting.value])
                     }
                     is SettingString ->
-                        Chat.clientMessage("Value of " + setting.name + " is (boolean) " + setting.value)
+                        Chat.clientMessage("Value of " + setting.name + " is (string) " + setting.value)
             }
         }
         else if(args.size == 3) {

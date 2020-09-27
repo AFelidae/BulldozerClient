@@ -3,6 +3,7 @@ package bulldozer.gui
 import bulldozer.Manager
 import bulldozer.Manager.getModule
 import bulldozer.Module
+import bulldozer.mixins.MinecraftClient
 import bulldozer.module.Gui
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
@@ -39,6 +40,8 @@ class ClickGui : Screen {
     }
 
     override fun render(matrix: MatrixStack?, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        val mc: net.minecraft.client.MinecraftClient = net.minecraft.client.MinecraftClient.getInstance()
+
         if(scroll < 0) scroll = 0
         this.renderBackground(matrix)
         super.render(matrix, mouseX, mouseY, partialTicks)
@@ -46,7 +49,36 @@ class ClickGui : Screen {
         var fromTop = -scroll
         for(tab in tabs){
             fromTop += tab.render(matrix,mouseX,mouseY,fromTop,leftClick,rightClick)
-            //mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100)
+        }
+
+        var gui = getModule(Gui::class.java) as Gui
+        if(gui.selected != null){
+            for(n in gui.selected!!.settings.indices){
+                var over: Boolean = false
+                if(mouseY in (n*20)..((n+1)*20) && mouseX > mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100)) over = true;
+
+                Screen.fill(matrix, mc.window.scaledWidth - 150 - (mc.window.scaledWidth % 100) , n*20, mc.window.scaledWidth, (n+1)*20,  if(over) 0x70444444 else 0x70222222)
+                when(gui.selected!!.settings[n]){
+                    is SettingBoolean -> {
+
+                    }
+                    is SettingDouble -> {
+
+                    }
+                    is SettingFloat -> {
+
+                    }
+                    is SettingInt -> {
+
+                    }
+                    is SettingMode -> {
+
+                    }
+                    is SettingString -> {
+
+                    }
+                }
+            }
         }
 
         leftClick = false
