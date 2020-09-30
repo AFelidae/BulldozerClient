@@ -1,7 +1,7 @@
 package bulldozer.module
 
 import bulldozer.Module
-import bulldozer.events.ReadPacket
+import bulldozer.events.SendPacket
 import bulldozer.events.Tick
 import com.google.common.eventbus.Subscribe
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket.*;
@@ -9,11 +9,13 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket.*;
 class Headdesk: Module("Headdesk", emptyArray<Any>()) {
     @Subscribe
     fun onTick(event: Tick){
+        if(!toggled) return
         mc.networkHandler!!.sendPacket( LookOnly(mc.player!!.yaw, 90.0f, mc.player!!.isOnGround))
     }
 
     @Subscribe
-    fun onRead(event: ReadPacket){
+    fun onSend(event: SendPacket){
+        if(!toggled) return
         if (event.packet is LookOnly) {
             event.isCancelled()
         }
