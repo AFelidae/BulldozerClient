@@ -108,7 +108,7 @@ class ClickGui : Screen {
                         val s: SettingMode = gui.selected!!.settings[n] as SettingMode
                         if(leftClick && over){
                             s.value += 1
-                            s.value == s.value % s.modes.size
+                            s.value = s.value % s.modes.size
                         }
                         mc.textRenderer.drawWithShadow(matrix, s.name + ": " + s.modes[s.value], (mc.window.scaledWidth - 140 - (mc.window.scaledWidth % 100)).toFloat(), ((n*20)+6).toFloat(), 0xFFFFFF);
 
