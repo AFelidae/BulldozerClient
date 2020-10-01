@@ -25,6 +25,7 @@ object Manager {
         Freecam(),
         Gui(),
         Headdesk(),
+        Highlight(),
         KillAura(),
         Leap(),
         Momentum(),
