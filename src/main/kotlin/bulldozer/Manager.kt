@@ -18,6 +18,7 @@ object Manager {
         Ambience(),
         Brightness(), //->Bright
         CameraClip(),
+        Chams(),
         ChestEsp(),
         EntityControl(),
         EntitySpeed(),

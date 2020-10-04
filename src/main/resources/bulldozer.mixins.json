@@ -11,6 +11,7 @@
     "ClientPlayerEntity",
     "GameRenderer",
     "Keyboard",
+    "LivingEntityRender",
     "LlamaEntity",
     "MinecraftClient",
     "RenderTickCounter"
