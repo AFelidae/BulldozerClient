@@ -2,16 +2,15 @@ package bulldozer.module
 
 import bulldozer.Module
 import bulldozer.events.Tick
+import bulldozer.gui.SettingFloat
 import com.google.common.eventbus.Subscribe
 import net.minecraft.entity.Entity
 
-class EntityStep: Module("EntityStep", emptyArray<Any>()) {
+class EntityStep: Module("EntityStep", arrayOf<Any>(SettingFloat("Height",2f, 1f, 10f))) {
     @Subscribe
     fun onTick(event: Tick) {
-        if(!toggled) return
         var e: Entity? = mc.player!!.vehicle ?: return
-        if(e!!.horizontalCollision) {
-            e!!.updatePosition(e!!.x, e!!.y + 1, e!!.z)
-        }
+        if(!toggled) e!!.stepHeight = (settings[0] as SettingFloat).value;
+        else e!!.stepHeight = 1f;
     }
 }

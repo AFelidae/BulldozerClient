@@ -20,6 +20,7 @@ object Manager {
         ChestEsp(),
         EntityControl(),
         EntitySpeed(),
+        EntitySpider(),
         EntityStep(),
         Esp(),
         FallDamage(),
