@@ -10,7 +10,7 @@ class EntityStep: Module("EntityStep", arrayOf<Any>(SettingFloat("Height",2f, 1f
     @Subscribe
     fun onTick(event: Tick) {
         var e: Entity? = mc.player!!.vehicle ?: return
-        if(!toggled) e!!.stepHeight = (settings[0] as SettingFloat).value;
+        if(toggled) e!!.stepHeight = (settings[0] as SettingFloat).value;
         else e!!.stepHeight = 1f;
     }
 }
