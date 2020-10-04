@@ -6,6 +6,7 @@
 
   ],
   "client": [
+    "Camera",
     "ClientConnection",
     "ClientPlayerEntity",
     "GameRenderer",

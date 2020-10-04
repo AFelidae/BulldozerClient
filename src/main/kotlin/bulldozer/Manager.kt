@@ -16,7 +16,8 @@ object Manager {
 
     var modules = arrayOf(
         Ambience(),
-        Brightness(),
+        Brightness(), //->Bright
+        CameraClip(),
         ChestEsp(),
         EntityControl(),
         EntitySpeed(),
