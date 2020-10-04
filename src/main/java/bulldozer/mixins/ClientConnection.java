@@ -3,6 +3,8 @@ package bulldozer.mixins;
 import bulldozer.Manager;
 import bulldozer.events.ReadPacket;
 import bulldozer.events.SendPacket;
+import bulldozer.module.Gui;
+import bulldozer.module.Mute;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;
@@ -37,10 +39,18 @@ public class ClientConnection {
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)
     public void send(Packet<?> packet_1, GenericFutureListener<? extends Future<? super Void>> genericFutureListener_1, CallbackInfo callback) {
         if (packet_1 instanceof ChatMessageC2SPacket) {
+
             ChatMessageC2SPacket pack = (ChatMessageC2SPacket) packet_1;
             if (pack.getChatMessage().startsWith("-")) {
                 Manager.callCommand(pack.getChatMessage().substring(1).trim());
                 callback.cancel();
+            }else {
+                Mute mute = (Mute) Manager.getModule(Mute.class);
+                if (mute.getToggled() && !mute.getTemporaryException()) {
+                    callback.cancel();
+                } else {
+                    mute.setTemporaryException(false);
+                }
             }
         }
         SendPacket event = new SendPacket(packet_1);

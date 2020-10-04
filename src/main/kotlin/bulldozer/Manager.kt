@@ -29,6 +29,7 @@ object Manager {
         KillAura(),
         Leap(),
         Momentum(),
+        Mute(),
         Respawn(),
         Sneak(),
         Speed(),
@@ -47,7 +48,9 @@ object Manager {
         Bottom(),
         DelBind(),
         Disconnect(),
+        Fancy(),
         Help(),
+        Say(),
         Top(),
         Toggle())
 
