@@ -33,6 +33,7 @@ object Manager {
         Leap(),
         Momentum(),
         Mute(),
+        Parkour(),
         Respawn(),
         Sneak(),
         Speed(),
@@ -45,15 +46,16 @@ object Manager {
         Zoom())
 
     var commands = arrayOf(
-        About(),
         Adjust(),
         Bind(),
         Bottom(),
+        Clear(),
         DelBind(),
         Disconnect(),
         Fancy(),
         Help(),
         Say(),
+        Server(),
         Top(),
         Toggle())
 

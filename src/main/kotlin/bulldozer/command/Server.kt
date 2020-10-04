@@ -4,8 +4,8 @@ import bulldozer.Command
 import bulldozer.utils.Chat
 import kotlin.math.floor
 
-class About : Command {
-    override val aliases = arrayOf("about")
+class Server : Command {
+    override val aliases = arrayOf("server")
     override val syntax = ""
 
     override fun onCommand(args: List<String>){
