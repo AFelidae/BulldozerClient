@@ -8,10 +8,9 @@ import com.google.common.eventbus.Subscribe
 import net.minecraft.client.gui.screen.DeathScreen
 import kotlin.math.roundToInt
 
-class Respawn: Module("Respawn", arrayOf(SettingBoolean("DeathSpot",true), SettingBoolean("Autospawn", true))) {
+class Respawn: Module("Respawn", arrayOf(SettingBoolean("DeathSpot",true), SettingBoolean("Autospawn", true)), true) {
     @Subscribe
     fun onOpenScreen(event: OpenScreen){
-        if(!toggled) return
         if(mc.player == null || event.openedScreen == null) return
         if(event.openedScreen is DeathScreen){
             if((settings[0] as SettingBoolean).value)

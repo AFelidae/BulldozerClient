@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d
 
 class Freecam: Module("Freecam", arrayOf(
     SettingDouble("Speed", 2.0, 0.0, 5.0)
-)) {
+), false) {
     private var freecamEntity: OtherClientPlayerEntity? = null // OtherClientPlayerEntity(mc.world,mc.player!!.gameProfile)
 
     override fun onEnable() {

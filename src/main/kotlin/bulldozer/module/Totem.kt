@@ -8,10 +8,9 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen
 import net.minecraft.item.Items
 import net.minecraft.screen.slot.SlotActionType
 
-class Totem: Module("Totem", emptyArray<Any>()) {
+class Totem: Module("Totem", emptyArray<Any>(), true) {
     @Subscribe
     fun onTick(event: Tick) {
-        if(!toggled) return
         if (mc.player!!.offHandStack.item === Items.TOTEM_OF_UNDYING) return
         for (i in 0..35) {
             if (mc.player!!.inventory.getStack(i).item === Items.TOTEM_OF_UNDYING) {

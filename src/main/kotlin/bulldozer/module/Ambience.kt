@@ -15,10 +15,9 @@ class Ambience : Module("Ambience", arrayOf(
     SettingMode("Weather",arrayOf("Clear", "Rain")),
     SettingFloat("Visibility", 1f, 0f, 2f),
     SettingInt("Time",12500,0,24000)
-)){
+), true){
     @Subscribe
     fun onRender(event: Render3D) {
-        if(!toggled) return
         if ((settings[0] as SettingBoolean).value) {
             if ((settings[2] as SettingMode).value == 0) mc.world!!.setRainGradient(-1f) else mc.world!!.setRainGradient((settings[3] as SettingFloat).value)
         }

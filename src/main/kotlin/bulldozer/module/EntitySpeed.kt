@@ -9,10 +9,9 @@ import com.google.common.eventbus.Subscribe
 import net.minecraft.entity.Entity
 import net.minecraft.util.math.Vec3d
 
-class EntitySpeed: Module("EntitySpeed", arrayOf<Any>(SettingBoolean("EntityFlight", false),SettingDouble("HorizontalSpeed", 1.0, 0.0, 5.0),SettingDouble("AscentSpeed",1.0, 0.5, 2.0),SettingDouble("DescendSpeed", 0.2, 0.0, 1.0))){
+class EntitySpeed: Module("EntitySpeed", arrayOf<Any>(SettingBoolean("EntityFlight", false),SettingDouble("HorizontalSpeed", 1.0, 0.0, 5.0),SettingDouble("AscentSpeed",1.0, 0.5, 2.0),SettingDouble("DescendSpeed", 0.2, 0.0, 1.0)), true){
     @Subscribe
     fun onTick(event: Tick){
-        if(!toggled) return
         var e: Entity? = mc.player!!.vehicle ?: return
 
         val speed: Double = (settings[1] as SettingDouble).value

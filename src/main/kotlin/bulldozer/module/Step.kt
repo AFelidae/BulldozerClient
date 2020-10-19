@@ -5,7 +5,7 @@ import bulldozer.events.Tick
 import bulldozer.gui.SettingFloat
 import com.google.common.eventbus.Subscribe
 
-class Step: Module("Step", arrayOf<Any>(SettingFloat("Height",1f, 0.5f, 10f))) {
+class Step: Module("Step", arrayOf<Any>(SettingFloat("Height",1f, 0.5f, 10f)), false) {
 
     @Subscribe
     fun onTick(event: Tick) {

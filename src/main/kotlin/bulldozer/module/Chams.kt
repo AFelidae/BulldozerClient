@@ -13,7 +13,7 @@ class Chams : Module("Chams", arrayOf(
     SettingBoolean("Teammate", true),
     SettingBoolean("Friend", true),
     SettingBoolean("Item", true),
-    SettingBoolean("Other", false))){
+    SettingBoolean("Other", false)), true){
 
 
     fun shouldSee(e: Entity) : Boolean{

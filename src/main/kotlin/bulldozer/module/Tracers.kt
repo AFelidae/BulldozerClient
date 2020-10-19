@@ -19,11 +19,10 @@ class Tracers : Module("Tracers", arrayOf(
     SettingBoolean("Other", false),
     SettingFloat("Opacity", 0.3f, 0f, 1f),
     SettingBoolean("ShowInvisible", true),
-    SettingBoolean("DistanceSize", false))){
+    SettingBoolean("DistanceSize", false)), true){
 
     @Subscribe
     fun onRender(event: Render3D){
-        if(!toggled) return
         val opacity = (settings[7] as SettingFloat).value
         var wide = 2.5f
         for(e in mc.world!!.entities){

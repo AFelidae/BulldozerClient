@@ -18,11 +18,10 @@ class Esp : Module("Esp", arrayOf(
     SettingBoolean("Item", true),
     SettingBoolean("Other", false),
     SettingFloat("Opacity", 0.3f, 0f, 1f),
-    SettingBoolean("ShowInvisible", true))){
+    SettingBoolean("ShowInvisible", true)), true){
 
     @Subscribe
     fun onRender(event: Render3D){
-        if(!toggled) return
         val opacity = (settings[7] as SettingFloat).value
         for(e in mc.world!!.entities){
             if(!e.isAttackable) continue

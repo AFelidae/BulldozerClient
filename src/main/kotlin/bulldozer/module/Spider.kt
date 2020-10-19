@@ -11,10 +11,9 @@ import com.google.common.eventbus.Subscribe
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket
 
-class Spider: Module("Spider", emptyArray<Any>()) {
+class Spider: Module("Spider", emptyArray<Any>(), true) {
     @Subscribe
     fun onTick(event: Tick) {
-        if(!toggled) return
         if(mc.player!!.horizontalCollision && mc.options.keyForward.isPressed){
             mc.player!!.setVelocity(mc.player!!.velocity.x, 0.3, mc.player!!.velocity.z)
         }

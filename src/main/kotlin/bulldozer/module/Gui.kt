@@ -2,7 +2,7 @@ package bulldozer.module
 
 import bulldozer.Module
 
-class Gui:  Module("Gui", emptyArray<Any>()) {
+class Gui:  Module("Gui", emptyArray<Any>(), true) {
     @kotlin.jvm.JvmField
     var selected: Module? = null
 

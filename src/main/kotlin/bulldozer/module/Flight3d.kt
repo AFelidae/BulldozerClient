@@ -10,15 +10,13 @@ import net.minecraft.util.math.Vec3d
 
 class Flight3d: Module("Flight3d", arrayOf(
     SettingDouble("Speed", 1.0, 0.0, 3.0),
-    SettingBoolean("Levitate", true))) {
+    SettingBoolean("Levitate", true)), true) {
     @Subscribe
     fun onTick(event: Tick){
-        if(toggled){
-            if(mc.options.keyForward.isPressed)
-                mc.player?.velocity = VectorUtil.forwardVector3D().multiply((settings[0] as SettingDouble).value)
-            else if((settings[1] as SettingBoolean).value){
-                mc.player?.velocity = Vec3d(0.0,0.0,0.0)
-            }
+        if(mc.options.keyForward.isPressed)
+            mc.player?.velocity = VectorUtil.forwardVector3D().multiply((settings[0] as SettingDouble).value)
+        else if((settings[1] as SettingBoolean).value){
+            mc.player?.velocity = Vec3d(0.0,0.0,0.0)
         }
     }
 }

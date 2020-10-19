@@ -17,11 +17,10 @@ class ChestEsp : Module("Chestesp", arrayOf(
     SettingBoolean("Shulkers", true),
     SettingBoolean("Others", true),
     SettingBoolean("Entities", true),
-    SettingFloat("Opacity", 0.3f, 0f, 1f))){
+    SettingFloat("Opacity", 0.3f, 0f, 1f)), true){
 
     @Subscribe
     fun onRender(event: Render3D){
-        if(!toggled) return
         var opacity = (settings[6] as SettingFloat).value
         for(block in mc.world!!.blockEntities){
             when(Typer.container(block)){

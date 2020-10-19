@@ -12,12 +12,14 @@ open class Module {
     var key = -2
     var name: String
     var settings: Array<Any>
+    private var blockEvents: Boolean = true
     var mc: MinecraftClient = MinecraftClient.getInstance()
 
-    constructor(n: String, s: Array<Any>){
+    constructor(n: String, s: Array<Any>, e: Boolean){
         name = n
         settings = s
-        Manager.eventSystem.register(this)
+        blockEvents = e
+        if(!blockEvents) Manager.eventSystem.register(this)
     }
 
     fun toggle(){
@@ -46,6 +48,10 @@ open class Module {
         return null
     }
 
-    open fun onEnable(){}
-    open fun onDisable(){}
+    open fun onEnable(){
+        if(blockEvents) Manager.eventSystem.register(this)
+    }
+    open fun onDisable(){
+        if(blockEvents) Manager.eventSystem.unregister(this)
+    }
 }
