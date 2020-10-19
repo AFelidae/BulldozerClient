@@ -46,6 +46,7 @@ object Manager {
         Timer(),
         Totem(),
         Tracers(),
+        UnfocusedCPU(),
         Zoom())
 
     var commands = arrayOf(

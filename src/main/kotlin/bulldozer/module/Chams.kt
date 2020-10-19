@@ -1,13 +1,9 @@
 package bulldozer.module
 
 import bulldozer.Module
-import bulldozer.events.Render3D
 import bulldozer.gui.SettingBoolean
-import bulldozer.gui.SettingFloat
-import bulldozer.utils.DrawUtil
 import bulldozer.utils.EntityType
 import bulldozer.utils.Typer
-import com.google.common.eventbus.Subscribe
 import net.minecraft.entity.Entity
 
 class Chams : Module("Chams", arrayOf(
