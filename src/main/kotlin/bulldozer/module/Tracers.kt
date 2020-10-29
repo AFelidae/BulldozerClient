@@ -27,8 +27,8 @@ class Tracers : Module("Tracers", arrayOf(
         var wide = 2.5f
         for(e in mc.world!!.entities){
             if(!e.isAttackable) continue
-            if(e.isInvisible && !((settings[7] as SettingBoolean).value)) continue
-            if((settings[8] as SettingBoolean).value) wide = 5f - (mc.player!!.distanceTo(e)/5).toFloat()
+            if(e.isInvisible && !((settings[8] as SettingBoolean).value)) continue
+            if((settings[9] as SettingBoolean).value) wide = 5f - (mc.player!!.distanceTo(e)/5).toFloat()
             if(wide < 1f) wide = 1f
             when(Typer.entity(e)){
                 EntityType.ANIMAL -> {
