@@ -15,39 +15,13 @@ object Manager {
     open var bindname = ""
 
     var modules = arrayOf(
-        Ambience(),
-        Brightness(), //->Bright
-        CameraClip(),
         Chams(),
-        ChestEsp(),
-        EntityControl(),
-        EntitySpeed(),
-        EntitySpider(),
-        EntityStep(),
-        Esp(),
-        FallDamage(),
-        Flight3d(),
-        FlightStatic(),
         Freecam(),
         Gui(),
-        Headdesk(),
-        Highlight(),
-        KillAura(),
-        Leap(),
-        Momentum(),
         Mute(),
         Parkour(),
-        Respawn(),
-        Sneak(),
-        Speed(),
-        Spider(),
-        Step(),
-        Strafe(),
-        Timer(),
-        Totem(),
         Tracers(),
-        UnfocusedCPU(),
-        Zoom())
+        UnfocusedCPU())
 
     var commands = arrayOf(
         Adjust(),

@@ -6,15 +6,12 @@
 
   ],
   "client": [
-    "Camera",
     "ClientConnection",
     "ClientPlayerEntity",
     "GameRenderer",
     "Keyboard",
     "LivingEntityRender",
-    "LlamaEntity",
-    "MinecraftClient",
-    "RenderTickCounter"
+    "MinecraftClient"
   ],
   "injectors": {
     "defaultRequire": 1
