@@ -65,4 +65,8 @@ object TNTUtils {
         mc.player!!.yaw += MathHelper.wrapDegrees(yaw - mc.player!!.yaw)
         mc.player!!.pitch += MathHelper.wrapDegrees(pitch - mc.player!!.pitch)
     }
+
+    fun drawFloor(blockPos: BlockPos, r: Float, g: Float, b: Float, a: Float){
+        DrawUtil.drawBox(blockPos.x.toDouble(), blockPos.y.toDouble() + 1, blockPos.z.toDouble(), blockPos.x.toDouble() +1, blockPos.y.toDouble() + 1, blockPos.z.toDouble() + 1, r, g, b, a)
+    }
 }

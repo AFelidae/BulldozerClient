@@ -29,11 +29,11 @@ class AutoTNT: Module("AutoTNT", arrayOf<Any>(SettingBoolean("Debugging mode", t
                 if(b.isAir) continue
                 if(!(b.isOf(Blocks.SAND) || b.isOf(Blocks.GRAVEL) || b.isOf(Blocks.RED_SAND))) continue
                 if(TNTUtils.blacklist[blockPos] != null){
-                    DrawUtil.blockBox(blockPos, 1.0f, 0.0f, 0.0f, 0.3f)
+                    TNTUtils.drawFloor(blockPos, 1.0f, 0.0f, 0.0f, 0.3f)
                     continue
                 }
                 val weight = TNTUtils.getWeight(blockPos) - abs(x) - abs(z)
-                if((settings[0] as SettingBoolean).value) DrawUtil.blockBox(blockPos, 1.0f, 1.0f, 1.0f, 0.3f)
+                if((settings[0] as SettingBoolean).value) TNTUtils.drawFloor(blockPos, 1.0f, 1.0f, 1.0f, 0.3f)
                 if(bestWeight == null){
                     bestPos = blockPos
                     bestWeight = weight
@@ -46,10 +46,11 @@ class AutoTNT: Module("AutoTNT", arrayOf<Any>(SettingBoolean("Debugging mode", t
             }
         }
         if(bestWeight != null)
-            if((settings[0] as SettingBoolean).value) DrawUtil.blockBox(bestPos!!, 0.0f, 0.0f, 1.0f, 0.3f)
+            if((settings[0] as SettingBoolean).value) TNTUtils.drawFloor(bestPos!!, 0.0f, 0.0f, 1.0f, 0.3f)
         bestW = bestWeight
         bestP = bestPos
     }
+
 
     @Subscribe
     fun onTick(event: Tick){
