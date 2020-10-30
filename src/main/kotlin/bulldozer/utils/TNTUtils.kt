@@ -10,6 +10,8 @@ import kotlin.math.sqrt
 
 
 object TNTUtils {
+    var blacklist = HashMap<BlockPos, Boolean>(); //I swear theres some data structure that you can just check if its in it but its not a hashmap
+
     fun joinLobby(){
         Chat.sendMessage("/play tnt_tntrun")
     }
@@ -41,6 +43,7 @@ object TNTUtils {
             for(z in -4..4){
                 //Will count itself and have a value of 1 at minimum
                 val b = mc.world!!.getBlockState(blockPos.north(x).east(z))
+                if(blacklist[blockPos.north(x).east(z)] != null) continue
                 if(b.isOf(Blocks.SAND) || b.isOf(Blocks.GRAVEL) || b.isOf(Blocks.RED_SAND)) weight++
             }
         }
