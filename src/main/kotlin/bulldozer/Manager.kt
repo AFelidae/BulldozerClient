@@ -15,26 +15,18 @@ object Manager {
     open var bindname = ""
 
     var modules = arrayOf(
-        Chams(),
-        Freecam(),
         Gui(),
         Mute(),
-        Parkour(),
         Tracers(),
         UnfocusedCPU())
 
     var commands = arrayOf(
         Adjust(),
         Bind(),
-        Bottom(),
         Clear(),
         DelBind(),
-        Disconnect(),
-        Fancy(),
         Help(),
         Say(),
-        Server(),
-        Top(),
         Toggle())
 
     @JvmStatic

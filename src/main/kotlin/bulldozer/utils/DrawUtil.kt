@@ -74,7 +74,9 @@ object DrawUtil {
 
     fun entityLine(entity: Entity, r: Float, g:Float, b:Float, a:Float, t:Float){
         val mc :MinecraftClient = MinecraftClient.getInstance()
-        val forward = VectorUtil.forwardVector3D()
+        val forward = Vec3d(0.0, 0.0, 1.0)
+            .rotateX((-Math.toRadians(mc.cameraEntity!!.pitch.toDouble())).toFloat())
+            .rotateY((-Math.toRadians(mc.cameraEntity!!.yaw.toDouble())).toFloat())
 
 
 
