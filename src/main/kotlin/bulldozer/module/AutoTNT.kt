@@ -17,6 +17,8 @@ class AutoTNT: Module("AutoTNT", arrayOf<Any>(SettingBoolean("Debugging mode", t
 
     @Subscribe
     fun render(event: Render3D){
+        if(!toggled) return
+
         if(mc.player!!.isOnGround) TNTUtils.blacklist[mc.player!!.blockPos.down(1)] = true
         var bestWeight: Double? = null
         var bestPos: BlockPos? = null
@@ -51,6 +53,8 @@ class AutoTNT: Module("AutoTNT", arrayOf<Any>(SettingBoolean("Debugging mode", t
 
     @Subscribe
     fun onTick(event: Tick){
+        if(!toggled) return
+
         if(!(settings[1] as SettingBoolean).value) return
         if(bestW != null && mc.player!!.isOnGround){
             TNTUtils.lookAt(bestP!!.x.toDouble() + 0.5, bestP!!.y.toDouble() + 0.5, bestP!!.z.toDouble() + 0.5)
