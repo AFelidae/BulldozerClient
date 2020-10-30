@@ -18,6 +18,7 @@ object Manager {
         Gui(),
         Mute(),
         Tracers(),
+        AutoTNT(),
         UnfocusedCPU())
 
     var commands = arrayOf(
@@ -27,7 +28,8 @@ object Manager {
         DelBind(),
         Help(),
         Say(),
-        Toggle())
+        Toggle(),
+        WeightTest())
 
     @JvmStatic
     fun callCommand(command: String) {

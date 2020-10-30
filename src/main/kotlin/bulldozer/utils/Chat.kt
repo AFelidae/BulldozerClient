@@ -1,9 +1,18 @@
 package bulldozer.utils
 
+import bulldozer.Manager.getModule
+import bulldozer.module.Mute
 import net.minecraft.client.MinecraftClient
 import net.minecraft.text.LiteralText
 
 object Chat {
+    @JvmStatic
+    fun sendMessage(msg: String){
+        val mute = getModule(Mute::class.java) as Mute?
+        mute!!.temporaryException = true
+        MinecraftClient.getInstance().player!!.sendChatMessage(msg)
+    }
+
     @JvmStatic
     fun normalMessage(msg: String){
         MinecraftClient.getInstance().inGameHud.chatHud
@@ -15,7 +24,7 @@ object Chat {
         try {
             MinecraftClient.getInstance().inGameHud.chatHud
                 .addMessage(LiteralText("§7[§6Bulldozer§7] $msg"))
-        } catch (err:Exception) {}
+        } catch (err: Exception) {}
     }
 
     @JvmStatic
