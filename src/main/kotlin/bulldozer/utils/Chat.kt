@@ -1,12 +1,14 @@
 package bulldozer.utils
 
+import bulldozer.Manager
+import bulldozer.module.Mute
 import net.minecraft.client.MinecraftClient
 import net.minecraft.text.LiteralText
 
 object Chat {
     @JvmStatic
     fun sendMessage(msg: String){
-        val mute = getModule(Mute::class.java) as Mute?
+        val mute = Manager.getModule(Mute::class.java) as Mute?
         mute!!.temporaryException = true
         MinecraftClient.getInstance().player!!.sendChatMessage(msg)
     }
