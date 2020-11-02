@@ -15,6 +15,7 @@ object Manager {
     open var bindname = ""
 
     var modules = arrayOf(
+        AirJump(),
         Ambience(),
         Brightness(), //->Bright
         CameraClip(),
@@ -58,6 +59,7 @@ object Manager {
         Disconnect(),
         Fancy(),
         Help(),
+        Panic(),
         Say(),
         Server(),
         Top(),
