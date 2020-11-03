@@ -50,6 +50,7 @@ object Manager {
         Totem(),
         Tracers(),
         UnfocusedCPU(),
+        Walk(),
         Zoom())
 
     var commands = arrayOf(
