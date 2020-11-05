@@ -17,6 +17,7 @@ class Brightness : Module("Fullbright", emptyArray<Any>(), true) { //Make sure t
 
     @Subscribe
     fun onTick(event: Tick) {
+        if(!toggled) return
         if (mc.options.gamma < 16) mc.options.gamma += 2
     }
 }

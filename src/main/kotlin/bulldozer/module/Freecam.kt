@@ -27,6 +27,8 @@ class Freecam: Module("Freecam", arrayOf(
     override fun onDisable() {
         mc.player!!.copyPositionAndRotation(freecamEntity)
         mc.world!!.removeEntity(freecamEntity!!.entityId)
+        mc.player!!.setVelocity(0.0, 0.0, 0.0)
+
         freecamEntity = null
     }
 
