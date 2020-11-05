@@ -40,6 +40,7 @@ object Manager {
         Mute(),
         Parkour(),
         Respawn(),
+        Shear(),
         Sneak(),
         Speed(),
         Spider(),
