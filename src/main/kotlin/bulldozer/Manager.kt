@@ -21,6 +21,7 @@ object Manager {
         CameraClip(),
         Chams(),
         ChestEsp(),
+        CrossbowReload(),
         EntityControl(),
         EntitySpeed(),
         EntitySpider(),
