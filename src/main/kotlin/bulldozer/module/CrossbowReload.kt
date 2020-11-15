@@ -10,7 +10,7 @@ import net.minecraft.screen.slot.SlotActionType
 
 class CrossbowReload : Module("CrossbowReload", arrayOf<Any>(SettingMode("Mode", arrayOf("Offhand", "Mainhand", "Hotbar"))), true) {
     @Subscribe
-    fun onTick(event: Tick) {
+    fun onTick(event: Tick) { //TODO: add creative mode
         when ((settings[0] as SettingMode).value) {
             0 -> { //Offhand
                 if (isLoadedCrossbow(mc.player!!.offHandStack)) return
