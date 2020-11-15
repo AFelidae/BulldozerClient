@@ -20,8 +20,10 @@ object Manager {
         Brightness(), //->Bright
         CameraClip(),
         Chams(),
+        BanChests(),
         ChestEsp(),
         CrossbowReload(),
+        Drop(),
         EntityControl(),
         EntitySpeed(),
         EntitySpider(),
@@ -42,6 +44,7 @@ object Manager {
         Parkour(),
         Respawn(),
         Shear(),
+        ShovelSpam(),
         Sneak(),
         Speed(),
         Spider(),
