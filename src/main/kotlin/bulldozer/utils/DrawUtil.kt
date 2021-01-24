@@ -55,7 +55,11 @@ object DrawUtil {
     }
 
     fun entityBox(entity: Entity, r: Float, g: Float, b: Float, a: Float){
-        drawBox(entity.boundingBox.minX,entity.boundingBox.minY,entity.boundingBox.minZ,entity.boundingBox.maxX,entity.boundingBox.maxY,entity.boundingBox.maxZ,r,g,b,a)
+        val delta = MinecraftClient.getInstance().tickDelta
+        val dx = (entity.x  - entity.prevX) * delta
+        val dy = (entity.y - entity.prevY) * delta
+        val dz = (entity.z - entity.prevZ) * delta
+        drawBox(entity.boundingBox.minX + dx,entity.boundingBox.minY + dy ,entity.boundingBox.minZ + dz,entity.boundingBox.maxX + dx,entity.boundingBox.maxY +dy,entity.boundingBox.maxZ+ dz,r,g,b,a)
     }
     
 
@@ -76,10 +80,15 @@ object DrawUtil {
         val mc :MinecraftClient = MinecraftClient.getInstance()
         val forward = VectorUtil.forwardVector3D()
 
+        val delta = mc.tickDelta
+        val dx = (entity.x  - entity.prevX) * delta
+        val dy = (entity.y - entity.prevY) * delta
+        val dz = (entity.z - entity.prevZ) * delta
 
 
+        val pos = mc.player!!.getCameraPosVec(delta)
 
-        drawLine(mc.player!!.x + forward.x, mc.player!!.eyeY + forward.y, mc.player!!.z + forward.z, entity.x, entity.y, entity.z, r, g, b, a, t)
+        drawLine(pos.x + forward.x, pos.y + forward.y, pos.z + forward.z, entity.x + dx, entity.y + dy, entity.z + dz, r, g, b, a, t)
     }
 
     private fun offsetRender() {
